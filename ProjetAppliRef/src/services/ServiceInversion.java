@@ -4,14 +4,14 @@ import java.io.*;
 import java.net.*;
 
 
-class ServiceInversion implements Runnable {
+public class ServiceInversion implements Runnable {
 	
 	private static int cpt = 1;
 	
 	private final int numero;
 	private final Socket client;
 	
-	ServiceInversion(Socket socket) {
+	public ServiceInversion(Socket socket) {
 		this.numero = cpt ++;
 		this.client = socket;
 	}
@@ -19,15 +19,18 @@ class ServiceInversion implements Runnable {
 	public void run() {
 		System.out.println("*********Connexion "+this.numero+" démarrée");
 		try {
+			System.out.println("avant");
 			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
 			PrintWriter out = new PrintWriter (client.getOutputStream ( ), true);
+			System.out.println("aprés");
 			String line = in.readLine();
 			System.out.println("Connexion "+this.numero+" <-- "+line);
 			String invLine = new String (new StringBuffer(line).reverse());
 			out.println(invLine);
 			System.out.println("Connexion "+this.numero+" --> "+invLine);
 		}
-		catch (IOException e) {
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 		//Fin du service d'inversion
 		System.out.println("*********Connexion "+this.numero+" terminée");
