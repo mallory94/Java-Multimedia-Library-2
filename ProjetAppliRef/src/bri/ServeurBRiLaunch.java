@@ -7,15 +7,15 @@ import services.ServiceAuthentification;
 
 public class ServeurBRiLaunch implements Runnable{
 	
-private ServerSocket listen_socket;
-	private int portAmateur = 1600;
-	private int portProgrammeur = 1700;
+	private ServerSocket listen_socket;
+	private final int portAmateur = 2600;
+	private final int portProgrammeur = 2700;
 	
 
 	// Cree un serveur TCP - objet de la classe ServerSocket
 	public ServeurBRiLaunch(int port) {
 		try {
-			listen_socket = new ServerSocket(port);
+			listen_socket = new ServerSocket(port); //premier problème vu, le serveur brilauch marche qu
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -26,6 +26,7 @@ private ServerSocket listen_socket;
 	// qui va la traiter.
 	@Override
 	public void run() {
+		System.out.println("Serveur connecté au port : " + listen_socket.getLocalPort());
 		try {
 			if (listen_socket.getLocalPort() == portAmateur) {
 				while(true) {
@@ -33,6 +34,7 @@ private ServerSocket listen_socket;
 				}
 			}
 			else if (listen_socket.getLocalPort() == portProgrammeur) {
+				System.out.println("Programmeur reconnu");
 				while(true) {
 					new Thread( new ServiceAuthentification(listen_socket.accept())).start();
 				}
@@ -41,6 +43,10 @@ private ServerSocket listen_socket;
 		catch (IOException e) { 
 			try {this.listen_socket.close();} catch (IOException e1) {}
 			System.err.println("Pb sur le port d'écoute :"+e);
+		}
+		finally {
+			System.out.println("Serveur au port : " + listen_socket.getLocalPort() + " éteint.");
+			try {this.listen_socket.close();} catch (IOException e1) {}
 		}
 	}
 
