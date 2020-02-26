@@ -31,6 +31,12 @@ public class Amateur {
 			line = sin.readLine();
 			// Ecrit la ligne envoyee par le serveur
 			System.out.println(line);
+			
+			line = clavier.readLine();
+			sout.println(line);
+			
+			System.out.println(sin.readLine());
+			
 			socket.close();
 		}
 		catch (IOException e) { System.err.println(e); }
