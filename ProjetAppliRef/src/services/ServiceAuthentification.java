@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ServiceAuthentification extends Service implements Runnable {
+public class ServiceAuthentification extends ServiceStandard implements Runnable {
 	
 	
 	public ServiceAuthentification(Socket accept) {

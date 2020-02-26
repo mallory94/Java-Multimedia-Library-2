@@ -4,7 +4,7 @@ package bri;
 import java.io.*;
 import java.net.*;
 
-import services.ServiceRegistry;
+
 import services.*;
 
 class ServiceBRi implements Runnable {

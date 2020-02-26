@@ -2,12 +2,12 @@ package services;
 
 import java.net.Socket;
 
-public abstract class Service {
+public abstract class ServiceStandard {
 	
 
 	private final Socket client;
 	
-	public Service(Socket socket) {
+	public ServiceStandard(Socket socket) {
 		this.client = socket;
 
 	}
