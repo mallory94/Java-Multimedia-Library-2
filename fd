@@ -1,0 +1,24 @@
+[1mdiff --git a/ProjetAppliRef/src/services/ServiceAuthentification.java b/ProjetAppliRef/src/services/ServiceAuthentification.java[m
+[1mindex f95025a..0fa7592 100644[m
+[1m--- a/ProjetAppliRef/src/services/ServiceAuthentification.java[m
+[1m+++ b/ProjetAppliRef/src/services/ServiceAuthentification.java[m
+[36m@@ -18,9 +18,7 @@[m [mpublic class ServiceAuthentification extends Service implements Runnable {[m
+ 		BufferedReader in = null;[m
+ 		PrintWriter out = null;[m
+ 		try {[m
+[31m-			in = new BufferedReader([m
+[31m-					new InputStreamReader(this.getSocket().getInputStream())[m
+[31m-					);[m
+[32m+[m			[32min = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));[m[41m[m
+ 			out = new PrintWriter (this.getSocket().getOutputStream ( ), true);[m
+ 			out.println("Entrez votre identifiant");[m
+ 			String id = in.readLine();[m
+[36m@@ -52,7 +50,7 @@[m [mpublic class ServiceAuthentification extends Service implements Runnable {[m
+ 	}[m
+ [m
+ 	private boolean connectionValide(String id, String mdp) {[m
+[31m-		[m
+[32m+[m		[32m// à faire[m[41m [m
+ 		return false;[m
+ 	}[m
+ 	[m
