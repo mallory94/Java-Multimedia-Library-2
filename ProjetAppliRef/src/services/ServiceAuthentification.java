@@ -18,9 +18,7 @@ public class ServiceAuthentification extends Service implements Runnable {
 		BufferedReader in = null;
 		PrintWriter out = null;
 		try {
-			in = new BufferedReader(
-					new InputStreamReader(this.getSocket().getInputStream())
-					);
+			in = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
 			out = new PrintWriter (this.getSocket().getOutputStream ( ), true);
 			out.println("Entrez votre identifiant");
 			String id = in.readLine();
@@ -52,7 +50,7 @@ public class ServiceAuthentification extends Service implements Runnable {
 	}
 
 	private boolean connectionValide(String id, String mdp) {
-		
+		// à faire 
 		return false;
 	}
 	
