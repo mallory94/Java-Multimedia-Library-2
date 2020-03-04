@@ -12,7 +12,6 @@ public class ServiceRegistry {
 	// partagée en concurrence par les clients et les "ajouteurs" de services,
 	// un Vector pour cette gestion est pratique
 	
-	
 	static {
 		servicesClasses = new ArrayList<Class<? extends bri.Service>>();
 	}
@@ -112,9 +111,6 @@ public class ServiceRegistry {
 				}
 				
 				servicesClasses.add((Class<? extends bri.Service>) classe);
-				possedeToStringue = true;
-				
-				
 				
 					
 

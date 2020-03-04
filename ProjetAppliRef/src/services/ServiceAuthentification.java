@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.HashMap;
 
 public class ServiceAuthentification extends ServiceStandard implements Runnable {
 	
+	private static HashMap<String, String> loginMdp = new HashMap<String, String>();
 	
 	public ServiceAuthentification(Socket accept) {
 		super(accept);
@@ -50,8 +52,14 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 	}
 
 	private boolean connectionValide(String id, String mdp) {
-		// à faire 
-		return false;
+		booleanconnexionValide = 
+		synchronized(loginMdp) {
+			try {
+				mdp.equals(loginMdp.get(id));
+			}
+			
+		}
+		return ;
 	}
 	
 	
