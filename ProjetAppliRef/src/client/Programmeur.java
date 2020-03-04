@@ -11,7 +11,7 @@ public class Programmeur {
 	private final static String HOST = "localhost"; 
 
 	public static void main(String[] args) {
-		Socket socket = null;		
+		Socket socket = null;
 		try {
 			socket = new Socket(HOST, PORT);
 			BufferedReader sin = new BufferedReader (new InputStreamReader(socket.getInputStream ( )));
@@ -33,7 +33,7 @@ public class Programmeur {
 			sout.println(line);
 			
 			System.out.println(sin.readLine());
-			
+			//fin du test de connexion
 			socket.close();
 		}
 		catch (IOException e) { System.err.println(e); }

@@ -19,10 +19,10 @@ public class ServiceInversion implements Runnable {
 	public void run() {
 		System.out.println("*********Connexion "+this.numero+" démarrée");
 		try {
-			System.out.println("avant");
+			//System.out.println("avant");
 			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
 			PrintWriter out = new PrintWriter (client.getOutputStream ( ), true);
-			System.out.println("aprés");
+			//System.out.println("aprés");
 			String line = in.readLine();
 			System.out.println("Connexion "+this.numero+" <-- "+line);
 			String invLine = new String (new StringBuffer(line).reverse());

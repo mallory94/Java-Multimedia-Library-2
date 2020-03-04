@@ -34,7 +34,6 @@ public class ServeurBRiLaunch implements Runnable{
 				}
 			}
 			else if (listen_socket.getLocalPort() == portProgrammeur) {
-				System.out.println("Programmeur reconnu");
 				while(true) {
 					new Thread( new ServiceAuthentification(listen_socket.accept())).start();
 				}

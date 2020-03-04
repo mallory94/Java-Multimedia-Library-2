@@ -13,6 +13,11 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 	
 	public ServiceAuthentification(Socket accept) {
 		super(accept);
+		this.initialisation();
+	}
+	
+	private void initialisation() {
+		loginMdp.put("test","test");
 	}
 
 	@Override
@@ -28,7 +33,10 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 				out.println("Entrez votre mot de passe");
 				String mdp = in.readLine();
 				if (connectionValide(id,mdp)) {
-					//connecte ?
+					out.println("gg mec t'es co");
+				}
+				else {
+					out.println("les informations données sont invalides, veuillez les vérifier");
 				}
 				
 			}
@@ -52,14 +60,20 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 	}
 
 	private boolean connectionValide(String id, String mdp) {
-		booleanconnexionValide = 
 		synchronized(loginMdp) {
 			try {
-				mdp.equals(loginMdp.get(id));
+				if(mdp.equals(loginMdp.get(id))) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			catch(Exception e) {
+				return false;
 			}
 			
 		}
-		return ;
 	}
 	
 	

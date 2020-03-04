@@ -10,7 +10,7 @@ public class AppliMain {
 		final int portProgrammeur = 2700;
 		
 		new Thread(new ServeurBRiLaunch(portAmateur)).start();
-		//new Thread(new ServeurBRiLaunch(portProgrammeur)).start();
+		new Thread(new ServeurBRiLaunch(portProgrammeur)).start();
 		
 	}
 
