@@ -7,9 +7,12 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashMap;
 
+import bri.ServiceBRIprog;
+import utilisateur.Programmeur;
+
 public class ServiceAuthentification extends ServiceStandard implements Runnable {
 	
-	private static HashMap<String, String> loginMdp = new HashMap<String, String>();
+	private static HashMap<String, Programmeur> loginMdp = new HashMap<String, Programmeur>();
 	
 	public ServiceAuthentification(Socket accept) {
 		super(accept);
@@ -17,7 +20,7 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 	}
 	
 	private void initialisation() {
-		loginMdp.put("test","test");
+		loginMdp.put("test",new Programmeur("test", "url"));
 	}
 
 	@Override
@@ -34,6 +37,7 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 				String mdp = in.readLine();
 				if (connectionValide(id,mdp)) {
 					out.println("gg mec t'es co");
+					new ServiceBRIprog(this.getSocket()).start();
 				}
 				else {
 					out.println("les informations données sont invalides, veuillez les vérifier");
@@ -62,7 +66,7 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 	private boolean connectionValide(String id, String mdp) {
 		synchronized(loginMdp) {
 			try {
-				if(mdp.equals(loginMdp.get(id))) {
+				if(mdp.equals(loginMdp.get(id).getMdp())) {
 					return true;
 				}
 				else {
