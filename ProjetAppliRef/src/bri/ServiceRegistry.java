@@ -15,9 +15,8 @@ public class ServiceRegistry {
 	static {
 		servicesClasses = new ArrayList<Class<? extends bri.Service>>();
 		try {
-			System.out.println("OhOh");
+
 			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceInversion"));
-			System.out.println("AhAh");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -82,7 +81,7 @@ public class ServiceRegistry {
 				Field field = null;
 				boolean socketExiste = false;
 				for (Field tmpField : fields) {
-					if (tmpField.getClass().getSimpleName().equals(Socket.class.getSimpleName())) {
+					if (tmpField.getType().getSimpleName().equals(Socket.class.getSimpleName())) {
 						socketExiste = true;
 						field = tmpField;
 					}
@@ -100,8 +99,9 @@ public class ServiceRegistry {
 				Method[] methods = classe.getMethods();
 				boolean possedeToStringue = false;
 				Method method = null;
+				String toStr = "toStringue";
 				for (Method tmpMethod : methods) {
-					if (method.getName().equals("toStringue"))  {
+					if (tmpMethod.getName().equals(toStr))  {
 							possedeToStringue = true;
 							method = tmpMethod;
 					}
@@ -144,13 +144,12 @@ public class ServiceRegistry {
 	
 // renvoie la classe de service (numService -1)	
 	public static Class<? extends Service> getServiceClass(int numService) {
-		return(servicesClasses.get(numService-1));
+		return(servicesClasses.get(numService));
 	}
 	
 // liste les activités présentes
 	public static String toStringue() {
-		String result = "Activités présentes :##";
-		System.out.println(servicesClasses.toString());
+		String result = "";
 		for (Class<? extends bri.Service> serviceClass : servicesClasses ) {
 			result = result + " 0 "  + serviceClass.getName() + " |";
 		}

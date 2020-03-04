@@ -23,21 +23,18 @@ public class Amateur {
 			System.out.println("Connecté au serveur " + socket.getInetAddress() + ":"+ socket.getPort());
 
 			String line;
-			System.out.println(sin.readLine()); //on écrit ce que le serveur veut
+			System.out.println(sin.readLine().replaceAll("##", "\n")); //on écrit ce que le serveur veut
 			line = clavier.readLine(); //on lit la réponse au clavier
 			// envoie au serveur
 			sout.println(line); 
 			// lit la réponse provenant du serveur
 			line = sin.readLine();
-			System.out.println("test");
 			// Ecrit la ligne envoyee par le serveur
-			System.out.println(line);
-			
+			System.out.println(line.replaceAll("##", "\n"));
 			line = clavier.readLine();
 			sout.println(line);
 			
-			System.out.println(sin.readLine());
-			
+			System.out.println(sin.readLine().replaceAll("##", "\n"));
 			socket.close();
 		}
 		catch (IOException e) { System.err.println(e); }

@@ -21,10 +21,9 @@ public class ServiceInversion implements Service{
 	public void run() {
 		System.out.println("*********Connexion "+this.numero+" démarrée");
 		try {
-			//System.out.println("avant");
 			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
 			PrintWriter out = new PrintWriter (client.getOutputStream ( ), true);
-			//System.out.println("aprés");
+			out.println("Bienvenue sur le service inversion. Ecrivez la chaine à inverser :##");
 			String line = in.readLine();
 			System.out.println("Connexion "+this.numero+" <-- "+line);
 			String invLine = new String (new StringBuffer(line).reverse());
@@ -43,8 +42,7 @@ public class ServiceInversion implements Service{
 		 client.close(); 
 	}
 
-	@Override
-	public String toString() {
+	public static String toStringue() {
 		return "Inversion de texte";
 	}
 }
