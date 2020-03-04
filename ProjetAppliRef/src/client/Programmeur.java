@@ -33,7 +33,24 @@ public class Programmeur {
 			sout.println(line);
 			
 			System.out.println(sin.readLine());
+			
 			//fin du test de connexion
+			boolean finDeConnexion = true; // le boolean qui indique lorsque la connexion doit être interrompu
+			String rep = "ya rien";
+			while(finDeConnexion) {
+				//rep = sin.readLine().replace("##", "\n");
+				System.out.println(sin.readLine());
+				if(rep == "fin") {
+					finDeConnexion = false;
+					System.out.println("--La connexion a été interrompu volontairement--");
+					break;
+				}
+				System.out.println(rep);
+				
+				rep = clavier.readLine();
+				sout.println(rep);
+				
+			}
 			socket.close();
 		}
 		catch (IOException e) { System.err.println(e); }
