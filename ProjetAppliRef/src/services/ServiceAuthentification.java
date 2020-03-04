@@ -14,6 +14,8 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 	
 	private static HashMap<String, Programmeur> loginMdp = new HashMap<String, Programmeur>();
 	
+	
+	
 	public ServiceAuthentification(Socket accept) {
 		super(accept);
 		this.initialisation();
