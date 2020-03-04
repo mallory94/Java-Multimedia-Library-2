@@ -14,8 +14,17 @@ public class ServiceRegistry {
 	
 	static {
 		servicesClasses = new ArrayList<Class<? extends bri.Service>>();
+		try {
+			System.out.println("OhOh");
+			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceInversion"));
+			System.out.println("AhAh");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
+	
 	private static List<Class<? extends bri.Service>> servicesClasses;
+	
 
 // ajoute une classe de service après contrôle de la norme BLTi
 	@SuppressWarnings("unchecked")
@@ -27,37 +36,44 @@ public class ServiceRegistry {
 				boolean isNorm = false;
 				for (Class<?> c : tabI) {
 					if (c.getSimpleName().equals("Service")) {
-						
+						isNorm = true;
 					}
 				}
 				if (!isNorm) {
 					throw new Exception("omg tu n'implemente pas bri.Service");
 				}
-
-
 				
-				if (!Modifier.isAbstract(classe.getModifiers())) {
+				if (Modifier.isAbstract(classe.getModifiers())) {
 					throw new Exception("La classe est abstract!");
 				}
 				
 				if (!Modifier.isPublic((classe.getModifiers()))){
 					throw new Exception("La classe n'est pas publique");
 				}
+				
 				try {
-					classe.getConstructor();
-				}
-				catch (NoSuchMethodException e) {
-					throw new Exception("Le service ne possède pas de constructeur");
+					if (classe.getConstructors().length == 0) {
+						throw new Exception("Le service ne possède pas de constructeur");
+					}
 				}
 				catch (Exception e) {
 					e.printStackTrace();
+					
 				}
 				
-				if (!Modifier.isPublic(classe.getConstructor().getModifiers())) {
+				try {
+					classe.getConstructor(Socket.class);
+				}
+				catch (Exception e) {
+					throw new Exception("Le constructeur ne prend pas de socket en argument"); 
+				}
+					
+				
+				if (!Modifier.isPublic(classe.getConstructor(Socket.class).getModifiers())) {
 					throw new Exception("Le constructeur du service n'est pas public"); 
 				}
 				
-				if (classe.getConstructor().getExceptionTypes().length != 0) {
+				if (classe.getConstructor(Socket.class).getExceptionTypes().length != 0) {
 					throw new Exception("Le constructeur du service renvoit des exceptions");
 				}
 				
@@ -134,7 +150,10 @@ public class ServiceRegistry {
 // liste les activités présentes
 	public static String toStringue() {
 		String result = "Activités présentes :##";
-		// todo
+		System.out.println(servicesClasses.toString());
+		for (Class<? extends bri.Service> serviceClass : servicesClasses ) {
+			result = result + " 0 "  + serviceClass.getName() + " |";
+		}
 		return result;
 	}
 

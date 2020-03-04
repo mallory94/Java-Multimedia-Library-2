@@ -3,8 +3,10 @@ package services;
 import java.io.*;
 import java.net.*;
 
+import bri.Service;
 
-public class ServiceInversion implements Runnable {
+
+public class ServiceInversion implements Service{
 	
 	private static int cpt = 1;
 	

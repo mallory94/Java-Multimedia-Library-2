@@ -29,6 +29,7 @@ public class Amateur {
 			sout.println(line); 
 			// lit la réponse provenant du serveur
 			line = sin.readLine();
+			System.out.println("test");
 			// Ecrit la ligne envoyee par le serveur
 			System.out.println(line);
 			
