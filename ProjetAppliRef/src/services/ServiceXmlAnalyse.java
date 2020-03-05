@@ -1,9 +1,13 @@
 package services;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,15 +19,44 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import appli.FTPUploadFile;
+import bri.Service;
 
-public class ServiceXmlAnalyse {
-   public static void main(String[] args) {
-	   String email = "malloga94@gmail.com";
-	   String chemin = "test.xml"; //contient aussi le nom du fichier
-	   new Thread(new ServiceEmail(email , analyseTest(chemin))).start();
+
+public class ServiceXmlAnalyse implements Service {
+	private final Socket socket;
+	
+	public ServiceXmlAnalyse(Socket socket) {
+		this.socket = socket;
+	}
+   
+   @Override
+   public void run() {
+	   System.out.println("*********Connexion démarrée");
+		try {
+			BufferedReader in = new BufferedReader (new InputStreamReader(socket.getInputStream ( )));
+			PrintWriter out = new PrintWriter (socket.getOutputStream ( ), true);
+			out.println("Bienvenue sur le service d'analyse xml.##"
+					+ "Entrez le chemin de votre fichier suivi d'un pipe puis de votre mail comme ceci \"C:/Users/Jean/Desktop/test.xml|example@gmail.com\":##");
+			String line = in.readLine();
+			System.out.println(line);
+			String[] lines = line.split("\\|");
+			for (String tmpLine : lines) {
+				System.out.println(tmpLine);
+			}
+			String chemin = lines[0];
+			String email = lines[1];
+			new FTPUploadFile(chemin).start();
+			new ServiceEmail(email,analyseTest(chemin)).start();;
+			out.println("Vous allez bientôt recevoir un mail contenant les résultats de l'analyse du fichier");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		//Fin du service d'inversion
+		System.out.println("*********Connexion terminée");
+		try {socket.close();} catch (IOException e2) {}
    }
-   
-   
    
    public static String analyseTest(String chemin) 
    {
@@ -42,7 +75,7 @@ public class ServiceXmlAnalyse {
 		  /*
 		   * Etape 3 : création d'un Document
 		   */
-		  final Document document= builder.parse(new File(chemin));
+	      final Document document= builder.parse(new File(chemin));
 		  
 		  StringBuilder strEmail = new StringBuilder();
 		  //Affichage du prologue
@@ -98,4 +131,13 @@ public class ServiceXmlAnalyse {
 	}
 	return "Une erreur s'est produite lors de l'analyse de votre fichier .xml . Vérifier que votre fichier respecte la norme de l'analyseur.";		
   }
+   
+   
+   public static String toStringue() {
+		return "Analyse de fichier .xml";
+	}
+
+
+
+
 }
