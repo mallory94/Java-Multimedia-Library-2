@@ -14,15 +14,13 @@ public class FTPUploadFile {
  public static void main(String[] args) {
   String serveur = "localhost";
   int port = 2121;
-//  String user = "nomUtilisateur";
-//  String password = "votreMotdePasse";
 
   FTPClient ftpClient = new FTPClient();
   try {
 
    ftpClient.connect(serveur, port);
    System.out.println("connection acceptée");
-   ftpClient.login("root", "root");
+   ftpClient.login("anonymous", "brette");
    ftpClient.enterLocalPassiveMode();
 
    ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
@@ -37,6 +35,7 @@ public class FTPUploadFile {
    //résultat de l'upload
    boolean res = ftpClient.storeFile(chemin, inputStream);
    System.out.println(ftpClient.getReplyString());
+   System.out.println(ftpClient.getReplyCode());
    //fermet le flut de lecture
    inputStream.close();
    
