@@ -18,59 +18,84 @@ import org.xml.sax.SAXException;
 
 public class ServiceXmlAnalyse {
    public static void main(String[] args) {
-      // Nous récupérons une instance de factory qui se chargera de nous fournir
-      // un parseur
-      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
-      try {
-         // Création de notre parseur via la factory
-         DocumentBuilder builder = factory.newDocumentBuilder();
-         File fileXML = new File("note.xml");
-
-         // parsing de notre fichier via un objet File et récupération d'un
-         // objet Document
-         // Ce dernier représente la hiérarchie d'objet créée pendant le parsing
-         Document xml = builder.parse(fileXML);
-
-         // Via notre objet Document, nous pouvons récupérer un objet Element
-         // Ce dernier représente un élément XML mais, avec la méthode ci-dessous,
-         // cet élément sera la racine du document
-         Element root = xml.getDocumentElement();
-         System.out.println(toStringRoot(root));
-
-         // Parsing d'un XML via une URL
-//         String uri = "http://www.w3schools.com/xml/note.xml";
-//         xml = builder.parse(uri);
-//         root = xml.getDocumentElement();
-//         System.out.println(root.getNodeName());
-
-         // Parsing d'un XML via un flux
-//         InputStream is = new FileInputStream(fileXML);
-//         xml = builder.parse(is);
-//         root = xml.getDocumentElement();
-//         System.out.println(root.getNodeName());
-
-      } catch (ParserConfigurationException e) {
-         e.printStackTrace();
-      } catch (SAXException e) {
-         e.printStackTrace();
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
+	   String email = "malloga94@gmail.com";
+	   String chemin = "test.xml"; //contient aussi le nom du fichier
+	   new Thread(new ServiceEmail(email , analyseTest(chemin))).start();
    }
    
    
-   public static String toStringRoot(Element root){
-	   
-	   String str = toStringNode(root.getChildNodes().item(0)) + root.getNodeName() + toStringNode(root.getChildNodes().item(1));
-	   return str;
-   }
    
-   public static String toStringNode(Node node) {
-	   System.out.println(node.getChildNodes().getLength());
-	   if (node.getChildNodes().getLength() != 0) {
-		   return(toStringNode(node.getChildNodes().item(0)) + node.getNodeName() + toStringNode(node.getChildNodes().item(1)));
-	   }
-	   return(node.getNodeName());
-   }
+   public static String analyseTest(String chemin) 
+   {
+    /*
+     * Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory"
+     */
+    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      	
+    try 
+    {
+	      /*
+	       * Etape 2 : création d'un parseur
+	       */
+	      final DocumentBuilder builder = factory.newDocumentBuilder();
+				
+		  /*
+		   * Etape 3 : création d'un Document
+		   */
+		  final Document document= builder.parse(new File(chemin));
+		  
+		  StringBuilder strEmail = new StringBuilder();
+		  //Affichage du prologue
+		  strEmail.append("\n\n*************METADONNEES************\n\n");
+		  strEmail.append("\nversion : " + document.getXmlVersion());
+		  strEmail.append("\nencodage : " + document.getXmlEncoding());		
+		  strEmail.append("\nstandalone : " + document.getXmlStandalone());
+		  
+		  /*
+		   * Etape 4 : récupération de l'Element racine
+		   */
+		  final Element racine = document.getDocumentElement();
+		
+		  //Affichage de l'élément racine
+		  strEmail.append("\n\n*************CONTENU************\n\n");
+		  
+		  /*
+		   * Etape 5 : récupération des personnes
+		   */
+		  final NodeList racineNoeuds = racine.getChildNodes();
+		  final int nbRacineNoeuds = racineNoeuds.getLength();
+		  int compteurLivres = 0;
+		  
+		  for (int i = 0; i<nbRacineNoeuds; i++) 
+		  {
+		    if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) 
+		    {
+		    	
+		    	++compteurLivres;
+		    	final Element element = (Element) racineNoeuds.item(i);
+		    	strEmail.append("\ncatégorie = " + element.getAttribute("categorie"));
+
+		    	strEmail.append("\ntitre = " + element.getElementsByTagName("titre").item(0).getTextContent());
+		    	strEmail.append("\nNom de l'auteur = " + element.getElementsByTagName("auteur").item(0).getTextContent());
+		    	strEmail.append("\nannée de parution = " + element.getElementsByTagName("annee").item(0).getTextContent());
+		    	strEmail.append("\nprix = " + element.getElementsByTagName("prix").item(0).getTextContent() + " euros\n");
+			  }
+		    }
+		  return "\n\nLe document renseigne sur " + compteurLivres + " livres " + strEmail.toString();
+		  
+	}		
+	catch (final ParserConfigurationException e) 
+	{
+	  e.printStackTrace();
+	}
+	catch (final SAXException e) 
+	{
+	  e.printStackTrace();
+	}
+	catch (final IOException e) 
+	{
+	  e.printStackTrace();
+	}
+	return "Une erreur s'est produite lors de l'analyse de votre fichier .xml . Vérifier que votre fichier respecte la norme de l'analyseur.";		
+  }
 }

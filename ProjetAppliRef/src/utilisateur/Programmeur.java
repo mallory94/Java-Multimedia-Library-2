@@ -4,6 +4,7 @@ public class Programmeur {
 
 	private String mdp;
 	private String url;
+	private String email;
 	
 	public Programmeur(String mdp, String url) {
 		this.mdp = mdp;
@@ -16,6 +17,10 @@ public class Programmeur {
 	
 	public String getUrl() {
 		return url;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 
 }

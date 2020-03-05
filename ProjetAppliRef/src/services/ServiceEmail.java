@@ -10,13 +10,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class ServiceEmail implements Runnable{
-
-
+	private String email;
+	private String resultatAnalyse;
+	
+	public ServiceEmail(String email, String resultatAnalyse) {
+		this.email = email;
+		this.resultatAnalyse = resultatAnalyse;
+	}
+	
 	@Override
 	public void run() {
 		
 		try {
 			envoyerMail();
+			System.out.println("mail envoyé");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -46,10 +53,11 @@ public class ServiceEmail implements Runnable{
 	        message.setFrom(new InternetAddress("BibliothequeServeur2020@gmail.com"));
 	        message.setRecipients(
 	                Message.RecipientType.TO,
-	                InternetAddress.parse("emailDuReceptionneur" + ", BibliothequeServeur2020@gmail.com")
+	                InternetAddress.parse(email + ", BibliothequeServeur2020@gmail.com")
 	        );
-	        message.setSubject("Objet du message");
-	        message.setText("message");
+	        message.setSubject("Analyse de votre fichier xml");
+	        message.setText("Bonjour, \nVous venez tout récemment de nous demander d'analyser votre fichier xml en rapport avec"
+	        		+ " une liste de livre. \n" + resultatAnalyse);
 	
 	        Transport.send(message);
 	        
