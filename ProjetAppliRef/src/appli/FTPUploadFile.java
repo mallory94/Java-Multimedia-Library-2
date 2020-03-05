@@ -9,42 +9,54 @@ import java.io.OutputStream;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
-public class FTPUploadFile {
+import bri.Service;
 
- public static void main(String[] args) {
-  String serveur = "localhost";
-  int port = 2121;
+public class FTPUploadFile implements Service{
+	String chemin;
+	
+	public FTPUploadFile(String chemin){
+		this.chemin = chemin;
+	}
+	
+	@Override
+	public void run() {
+		transfert();
+	}
+	
+	public String transfert(){
+	
+	String serveur = "localhost";
+	int port = 2121;
 
-  FTPClient ftpClient = new FTPClient();
-  try {
-
-   ftpClient.connect(serveur, port);
-   System.out.println("connection acceptée");
-   ftpClient.login("anonymous", "brette");
-   ftpClient.enterLocalPassiveMode();
-
-   ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-   
-   // Approche 1: upload d'un fichier en utilisant InputStream
-   File file = new File("C:/Users/gack/Desktop/fichierAUpload.txt");
-
-   String chemin = "fichierAUpload.txt";
-   InputStream inputStream = new FileInputStream(file);
-
-   System.out.println("Début de l'upload");
-   //résultat de l'upload
-   boolean res = ftpClient.storeFile(chemin, inputStream);
-   System.out.println(ftpClient.getReplyString());
-   System.out.println(ftpClient.getReplyCode());
-   //fermet le flut de lecture
-   inputStream.close();
-   
-   if (res==true) {
-     System.out.println("Le fichier "+chemin+" a été transféré avec succès");
-   }
-   else {
-	   System.out.println("erreur de transfert");
-   }
+	FTPClient ftpClient = new FTPClient();
+	try {
+		ftpClient.connect(serveur, port);
+	   	System.out.println("connection acceptée");
+	   	ftpClient.login("anonymous", "brette");
+	   	ftpClient.enterLocalPassiveMode();
+	
+	   	ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+	   
+	   	// Approche 1: upload d'un fichier en utilisant InputStream
+	   	File file = new File("chemin");
+	
+	   	String chemin = "tmpFichierAnalyse.xml";
+	   	InputStream inputStream = new FileInputStream(file);
+	
+	   	System.out.println("Début de l'upload");
+	   	//résultat de l'upload
+	   	boolean res = ftpClient.storeFile(chemin, inputStream);
+	   	System.out.println(ftpClient.getReplyString());
+	   	System.out.println(ftpClient.getReplyCode());
+	   	//fermet le flut de lecture
+	   	inputStream.close();
+	   
+	   	if (res==true) {
+	   		return("Le fichier "+chemin+" a été transféré avec succès");
+	   	}
+	   	else {
+	   		return("erreur de transfert");
+	   	}
 
    // Approche 2: upload d'un fichier en utilisant OutputStream
 //   file = new File("C:/piste 1.wma");
@@ -78,19 +90,28 @@ public class FTPUploadFile {
 //     System.out.println("Le fichier "+chemin+" a été transféré avec succès");
 //   }
 
-  } catch (IOException e) {
-   System.out.println(e.getMessage());
-   e.printStackTrace();
-  } finally {
-   try {
-    if (ftpClient.isConnected()) {
-     //fermer la connexion FTP
-     ftpClient.logout();
-     ftpClient.disconnect();
-    }
-   } catch (IOException ex) {
-    ex.printStackTrace();
-   }
-  }
- }
+		} catch (IOException e) {
+		  System.out.println(e.getMessage());
+		  e.printStackTrace();
+		  return("erreur de transfert");
+		} 
+		finally {
+			try {
+				if (ftpClient.isConnected()) {
+					//fermer la connexion FTP
+					ftpClient.logout();
+				ftpClient.disconnect();
+				}
+			} 
+			catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	
+	public void start() {
+		new Thread(this).start();
+	}
+	
 }

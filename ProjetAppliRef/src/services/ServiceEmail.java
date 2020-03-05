@@ -64,6 +64,12 @@ public class ServiceEmail implements Runnable{
 	    } catch (MessagingException e) {
 	        e.printStackTrace();
 	    }
+	    
+	    
+	}
+	
+	public void start() {
+		new Thread(this).start();
 	}
 	
 }

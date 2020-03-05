@@ -17,6 +17,7 @@ public class ServiceRegistry {
 		try {
 
 			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceInversion"));
+			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceXmlAnalyse"));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -150,8 +151,9 @@ public class ServiceRegistry {
 // liste les activités présentes
 	public static String toStringue() {
 		String result = "";
+		int compteur = 0;
 		for (Class<? extends bri.Service> serviceClass : servicesClasses ) {
-			result = result + " 0 "  + serviceClass.getName() + " |";
+			result = result + " " + compteur++ +" "  + serviceClass.getName() + " |";
 		}
 		return result;
 	}
