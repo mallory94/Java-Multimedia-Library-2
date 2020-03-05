@@ -22,11 +22,11 @@ public class FTPUploadFile {
 
    ftpClient.connect(serveur, port);
    System.out.println("connection acceptée");
-   //ftpClient.login(user, password );
+   ftpClient.login("root", "root");
    ftpClient.enterLocalPassiveMode();
 
    ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-
+   
    // Approche 1: upload d'un fichier en utilisant InputStream
    File file = new File("C:/Users/gack/Desktop/fichierAUpload.txt");
 
@@ -36,11 +36,15 @@ public class FTPUploadFile {
    System.out.println("Début de l'upload");
    //résultat de l'upload
    boolean res = ftpClient.storeFile(chemin, inputStream);
+   System.out.println(ftpClient.getReplyString());
    //fermet le flut de lecture
    inputStream.close();
    
    if (res==true) {
      System.out.println("Le fichier "+chemin+" a été transféré avec succès");
+   }
+   else {
+	   System.out.println("erreur de transfert");
    }
 
    // Approche 2: upload d'un fichier en utilisant OutputStream
