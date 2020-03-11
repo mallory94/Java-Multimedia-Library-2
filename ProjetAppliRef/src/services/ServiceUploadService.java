@@ -46,4 +46,8 @@ public class ServiceUploadService implements Service{
 	public static String toStringue() {
 		return "Inversion de texte";
 	}
+	
+	public void start() {
+		new Thread(this).start();
+	}
 }
