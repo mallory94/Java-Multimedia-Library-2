@@ -38,7 +38,6 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 				out.println("Entrez votre mot de passe");
 				String mdp = in.readLine();
 				if (connectionValide(id,mdp)) {
-					out.println("gg mec t'es co");
 					new ServiceBRIprog(this.getSocket()).start();
 				}
 				else {

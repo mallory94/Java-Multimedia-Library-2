@@ -5,9 +5,6 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 
-
-import services.*;
-
 class ServiceBRi implements Runnable {
 	
 	private Socket client;
@@ -25,7 +22,6 @@ class ServiceBRi implements Runnable {
 			// instancier le service numéro "choix" en lui passant la socket "client"
 			// invoquer run() pour cette instance ou la lancer dans un thread à part
 			try {
-				
 				new Thread(ServiceRegistry.getServiceClass(choix).getConstructor(Class.forName(Socket.class.getName())).newInstance(client)).start();
 			} catch (InstantiationException e) {
 				e.printStackTrace();

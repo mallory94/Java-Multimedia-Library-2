@@ -18,21 +18,19 @@ public class Programmeur {
 			PrintWriter sout = new PrintWriter (socket.getOutputStream ( ), true);
 			BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println("Connecté au serveur " + socket.getInetAddress() + ":"+ socket.getPort());
-
+			
 			String line;
-			System.out.println(sin.readLine()); //on écrit ce que le serveur veut
-			line = clavier.readLine(); //on lit la réponse au clavier
-			// envoie au serveur
-			sout.println(line); 
-			// lit la réponse provenant du serveur
-			line = sin.readLine();
-			// Ecrit la ligne envoyee par le serveur
-			System.out.println(line);
 			
-			line = clavier.readLine();
-			sout.println(line);
-			
-			System.out.println("état de connexion : " + sin.readLine());
+			while(!sin.ready()) {
+				System.out.println(sin.readLine()); //on écrit ce que le serveur veut
+				line = clavier.readLine(); //on lit la réponse au clavier
+				if (line.equals("exit")) {
+					break;
+				}
+				System.out.println(line);
+				// envoie au serveur
+				sout.println(line); 
+			}
 			
 			
 			socket.close();
