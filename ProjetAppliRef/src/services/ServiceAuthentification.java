@@ -68,9 +68,8 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 	private boolean connectionValide(String id, String mdp) {
 		synchronized(loginMdp) {
 			try {
-				if(mdp.equals(loginMdp.get(id).getMdp())) {
+				
 					return true;
-				}
 				else {
 					return false;
 				}
