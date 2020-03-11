@@ -5,9 +5,9 @@ public class Programmeur {
 	private String pseudo;
 	private String mdp;
 	private String url;
-	private String email;
 	
-	public Programmeur(String pseudo, String mdp, String url) {
+	public Programmeur(String pseudo, String mdp,String url) {
+		this.pseudo = pseudo;
 		this.mdp = mdp;
 		this.url = url;
 	}
@@ -18,10 +18,6 @@ public class Programmeur {
 	
 	public String getUrl() {
 		return url;
-	}
-	
-	public String getEmail() {
-		return email;
 	}
 	
 	public String getPseudo() {
