@@ -38,7 +38,7 @@ public class FTPUploadFile implements Service{
 	   	ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 	   
 	   	// Approche 1: upload d'un fichier en utilisant InputStream
-	   	File file = new File("chemin");
+	   	File file = new File(chemin);
 	
 	   	String chemin = "tmpFichierAnalyse.xml";
 	   	InputStream inputStream = new FileInputStream(file);
