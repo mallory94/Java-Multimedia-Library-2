@@ -27,9 +27,10 @@ public class Programmeur {
 				if (line.equals("exit")) {
 					break;
 				}
-				System.out.println(line);
-				// envoie au serveur
-				sout.println(line); 
+				else {
+					sout.println(line);
+				}
+				 
 			}
 			
 			

@@ -3,24 +3,20 @@ package utilisateur;
 public class Amateur {
 
 	private String mdp;
-	private String url;
-	private String email;
+	private String pseudo;
 	
-	public Amateur(String mdp, String url) {
+	public Amateur(String pseudo, String mdp) {
+		this.pseudo = pseudo;
 		this.mdp = mdp;
-		this.url = url;
 	}
 	
 	public String getMdp() {
 		return mdp;
 	}
 	
-	public String getUrl() {
-		return url;
+	public String getPseudo() {
+		return pseudo;
 	}
 	
-	public String getEmail() {
-		return email;
-	}
 
 }

@@ -21,7 +21,7 @@ public class ListeUtilisateur {
 	
 	public static Programmeur getProgrammeur(String login, String mdp) throws Exception {
 		try {
-			if(mdp.equals(amateurs.get(login).getMdp())) {
+			if(mdp.equals(programmeurs.get(login).getMdp())) {
 				return programmeurs.get(login);
 			}
 			else {
@@ -33,11 +33,11 @@ public class ListeUtilisateur {
 	}
 	
 	public static void initialisation() {
-		programmeurs.put("test",new Programmeur("test", "url"));
-		programmeurs.put("mal",new Programmeur("mmm", "malurl"));
+		programmeurs.put("test",new Programmeur("test", "test", "url"));
+		programmeurs.put("mal",new Programmeur("mal", "mmm","malurl"));
 		
-		amateurs.put("vad", new Amateur("vvv","vadurl"));
-		amateurs.put("mec", new Amateur("mec","mecurl"));
+		amateurs.put("vad", new Amateur("vad","vvv"));
+		amateurs.put("mec", new Amateur("mec","mec"));
 	}
 
 }

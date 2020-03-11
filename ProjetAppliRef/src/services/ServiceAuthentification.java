@@ -8,23 +8,15 @@ import java.net.Socket;
 import java.util.HashMap;
 
 import bri.ServiceBRIprog;
+import utilisateur.ListeUtilisateur;
 import utilisateur.Programmeur;
 
 public class ServiceAuthentification extends ServiceStandard implements Runnable {
 	
-	private static HashMap<String, Programmeur> loginMdp = new HashMap<String, Programmeur>();
-	
-	
-	
 	public ServiceAuthentification(Socket accept) {
 		super(accept);
-		this.initialisation();
 	}
 	
-	private void initialisation() {
-		loginMdp.put("test",new Programmeur("test", "url"));
-	}
-
 	@Override
 	public void run() {
 		BufferedReader in = null;
@@ -65,18 +57,12 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 	}
 
 	private boolean connectionValide(String id, String mdp) {
-		synchronized(loginMdp) {
-			try {
-				
-					return true;
-				else {
-					return false;
-				}
-			}
-			catch(Exception e) {
-				return false;
-			}
-			
+		try {
+			ListeUtilisateur.getProgrammeur(id, mdp);
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 	
