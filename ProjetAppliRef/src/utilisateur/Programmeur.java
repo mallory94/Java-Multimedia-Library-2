@@ -1,12 +1,13 @@
 package utilisateur;
 
 public class Programmeur {
-
+	
+	private String pseudo;
 	private String mdp;
 	private String url;
 	private String email;
 	
-	public Programmeur(String mdp, String url) {
+	public Programmeur(String pseudo, String mdp, String url) {
 		this.mdp = mdp;
 		this.url = url;
 	}
@@ -22,5 +23,8 @@ public class Programmeur {
 	public String getEmail() {
 		return email;
 	}
-
+	
+	public String getPseudo() {
+		return pseudo;
+	}
 }

@@ -15,5 +15,4 @@ public abstract class ServiceStandard {
 	protected Socket getSocket() {
 		return this.client;
 	}
-	
 }
