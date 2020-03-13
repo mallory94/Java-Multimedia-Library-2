@@ -14,7 +14,10 @@ public class ListeUtilisateur {
 			else {
 				throw new Exception("Les informations sont inexactes ou l'amateur demandé n'existe pas.");
 			}
-		}catch(Exception e) {
+		}catch(NullPointerException n) {
+			throw new Exception("L'utilisateur que vous demandez n'existe pas !");
+		}
+		catch(Exception e) {
 			throw e;
 		}
 	}

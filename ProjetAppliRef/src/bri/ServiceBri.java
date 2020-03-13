@@ -5,11 +5,12 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 
-class ServiceBRi implements Runnable {
+
+public class ServiceBRi implements Runnable {
 	
 	private Socket client;
 	
-	ServiceBRi(Socket socket) {
+	public ServiceBRi(Socket socket) {
 		client = socket;
 	}
 
@@ -17,12 +18,16 @@ class ServiceBRi implements Runnable {
 		try {
 			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
 			PrintWriter out = new PrintWriter(client.getOutputStream(),true);
-			out.println("Liste des services : ##" + ServiceRegistry.toStringue() + "##Tapez le numéro de service désiré : ");
+			out.println("Liste des services : ## (-1 : connexion pour vérifier ses messages !) ##" + ServiceRegistry.toStringue() + "##Tapez le numéro de service désiré : ");
 			int choix = Integer.parseInt(in.readLine());
 			// instancier le service numéro "choix" en lui passant la socket "client"
 			// invoquer run() pour cette instance ou la lancer dans un thread à part
 			try {
-				new Thread(ServiceRegistry.getServiceClass(choix).getConstructor(Class.forName(Socket.class.getName())).newInstance(client)).start();
+				if(choix == -1) {
+					System.out.println(" ici fera office du prochain service de messagerie");
+				} else {
+					new Thread(ServiceRegistry.getServiceClass(choix).getConstructor(Class.forName(Socket.class.getName())).newInstance(client)).start();
+				}
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {

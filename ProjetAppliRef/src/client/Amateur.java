@@ -34,7 +34,13 @@ public class Amateur {
 			line = clavier.readLine();
 			sout.println(line);
 			
+			/*System.out.println("socket : " + socket);
+			System.out.println("sin : " + sin);
+			System.out.println("sin.readLine() : " + sin.readLine());*/
 			System.out.println(sin.readLine().replaceAll("##", "\n"));
+			
+			
+			
 			socket.close();
 		}
 		catch (IOException e) { System.err.println(e); }
@@ -42,4 +48,27 @@ public class Amateur {
 		try { if (socket != null) socket.close(); } 
 		catch (IOException e2) { ; }		
 	}
+	
+	/*public static void connexion(Socket socket, BufferedReader sin, PrintWriter sout, BufferedReader clavier) { // cette fonction est utiliser pour permettre à l'utilisateur de se connecter
+		String line = "err";
+		try {
+			line = sin.readLine();
+			System.out.println(line); // on écrit la demande du serveur
+			
+			line = clavier.readLine(); // on lit le nom d'utilisateur
+			sout.println(line);
+			
+			line = sin.readLine();
+			System.out.println(line); // on écrit la demande du serveur
+			
+			line = clavier.readLine(); // on lit le mot de passe
+			sout.println(line);
+			
+			line = sin.readLine();
+			System.out.println(line);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}*/
 }

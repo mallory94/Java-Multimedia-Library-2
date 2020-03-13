@@ -19,11 +19,13 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 	
 	@Override
 	public void run() {
+		System.out.println(" -> test 1");
 		BufferedReader in = null;
 		PrintWriter out = null;
 		try {
 			in = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
 			out = new PrintWriter (this.getSocket().getOutputStream ( ), true);
+			System.out.println(" -> test 2");
 			out.println("Entrez votre identifiant");
 			String id = in.readLine();
 			if (id != null) {

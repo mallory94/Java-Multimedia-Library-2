@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 import services.ServiceAuthentification;
+import services.ServiceAuthentificationAmateur;
 
 public class ServeurBRiLaunch implements Runnable{
 	
@@ -31,6 +32,7 @@ public class ServeurBRiLaunch implements Runnable{
 			if (listen_socket.getLocalPort() == portAmateur) {
 				while(true) {
 					new ServiceBRi(listen_socket.accept()).start();
+					//new Thread( new ServiceAuthentificationAmateur(listen_socket.accept())).start();
 				}
 			}
 			else if (listen_socket.getLocalPort() == portProgrammeur) {
@@ -48,7 +50,7 @@ public class ServeurBRiLaunch implements Runnable{
 			try {this.listen_socket.close();} catch (IOException e1) {}
 		}
 	}
-
+	
 	 // restituer les ressources --> finalize
 	protected void finalize() throws Throwable {
 		try {this.listen_socket.close();} catch (IOException e1) {}
