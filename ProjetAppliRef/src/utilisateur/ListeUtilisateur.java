@@ -12,7 +12,7 @@ public class ListeUtilisateur {
 				return amateurs.get(login);
 			}
 			else {
-				throw new Exception("Les informations sont inexactes ou l'amateur demand� n'existe pas.");
+				throw new Exception("Les informations sont inexactes ou l'amateur demande n'existe pas.");
 			}
 		}catch(NullPointerException n) {
 			throw new Exception("L'utilisateur que vous demandez n'existe pas !");
@@ -28,7 +28,7 @@ public class ListeUtilisateur {
 				return programmeurs.get(login);
 			}
 			else {
-				throw new Exception("Les informations sont inexactes ou le programmeur demand� n'existe pas.");
+				throw new Exception("Les informations sont inexactes ou le programmeur demande n'existe pas.");
 			}
 		}catch(Exception e) {
 			throw e;
