@@ -27,7 +27,9 @@ public class ServiceNouvelleUrl implements Runnable {
 			PrintWriter out = new PrintWriter (client.getOutputStream(), true);
 			out.println("quelle est votre nouvelle URL ? : ");
 			String line = in.readLine();
-			
+			prog.setUrl(line);
+			out.println("url changé.");
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

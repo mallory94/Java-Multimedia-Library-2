@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 
 import services.ServiceNouveauService;
+import services.ServiceNouvelleUrl;
 import utilisateur.Programmeur;
 
 public class ServiceBRIprog implements Runnable {
@@ -45,6 +46,7 @@ public class ServiceBRIprog implements Runnable {
 				case 2:
 					break;
 				case 3:
+					new Thread(new ServiceNouvelleUrl(client, programmeur)).start();
 					break;
 				case 4:
 					break;
@@ -61,14 +63,15 @@ public class ServiceBRIprog implements Runnable {
 		}
 		catch (IOException e) {
 			e.printStackTrace();
-		}
-		finally {
 			try {
 				in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException e2) {
+				e2.printStackTrace();
 			}
 			out.close();
+		}
+		finally {
+			
 		}
 
 
