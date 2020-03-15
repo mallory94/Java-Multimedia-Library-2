@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 
-import services.ServiceUploadService;
+import services.ServiceNouveauService;
 import utilisateur.Programmeur;
 
 public class ServiceBRIprog implements Runnable {
@@ -40,7 +40,7 @@ public class ServiceBRIprog implements Runnable {
 				choix = Integer.parseInt(in.readLine());
 				switch (choix) {
 				case 1:
-					new ServiceUploadService(client, programmeur).start();
+					new Thread(new ServiceNouveauService(client, programmeur)).start();
 					break;
 				case 2:
 					break;

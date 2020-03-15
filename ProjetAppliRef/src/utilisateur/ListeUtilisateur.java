@@ -36,8 +36,8 @@ public class ListeUtilisateur {
 	}
 	
 	public static void initialisation() {
-		programmeurs.put("test",new Programmeur("test", "test", "url"));
-		programmeurs.put("mal",new Programmeur("mal", "mmm","malurl"));
+		programmeurs.put("test",new Programmeur("test", "test", "url", "anonymous", "brette"));
+		programmeurs.put("mal",new Programmeur("mal", "mmm","malurl", "anonymous", "brette"));
 		
 		amateurs.put("mallory", new Amateur("mallory","mallory", "anonymous", "brette"));
 		amateurs.put("vad", new Amateur("vad","vvv", "vad", "vad"));
