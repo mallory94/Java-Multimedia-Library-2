@@ -18,6 +18,7 @@ public class ServiceRegistry {
 
 			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceInversion"));
 			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceXmlAnalyse"));
+			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceMessagerie"));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -153,7 +154,7 @@ public class ServiceRegistry {
 		String result = "";
 		int compteur = 0;
 		for (Class<? extends bri.Service> serviceClass : servicesClasses ) {
-			result = result + " " + compteur++ +" "  + serviceClass.getName() + " |";
+			result = result + " " + compteur++ +" "  + serviceClass.getName() + " |##";
 		}
 		return result;
 	}
