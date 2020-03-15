@@ -37,21 +37,19 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 				}
 				
 			}
-			in.close();
-			out.close();
+			
 			
 		}
 		catch (IOException e) {
 			e.printStackTrace();
-		}
-		finally {
 			try {
 				in.close();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
-			
+			out.close();
+		}
+		finally {
 		}
 		
 	}
