@@ -29,16 +29,14 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 			if (id != null) {
 				out.println("Entrez votre mot de passe");
 				String mdp = in.readLine();
-				if (connectionValide(id,mdp)) {
-					new ServiceBRIprog(this.getSocket()).start();
+				Programmeur programmeur = connectionValide(id,mdp);
+				if (programmeur != null) {
+					new ServiceBRIprog(this.getSocket(), programmeur).start();
 				}
 				else {
 					out.println("les informations données sont invalides, veuillez les vérifier");
 				}
-				
 			}
-			
-			
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -54,13 +52,12 @@ public class ServiceAuthentification extends ServiceStandard implements Runnable
 		
 	}
 
-	private boolean connectionValide(String id, String mdp) {
+	private Programmeur connectionValide(String id, String mdp) {
 		try {
-			ListeUtilisateur.getProgrammeur(id, mdp);
-			return true;
+			return ListeUtilisateur.getProgrammeur(id, mdp);
 		}catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 	
