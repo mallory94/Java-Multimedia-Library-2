@@ -18,7 +18,7 @@ public class ServiceRegistry {
 
 			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceInversion"));
 			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceXmlAnalyse"));
-			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceMessagerie"));
+			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceMessagerieInterne"));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -109,23 +109,23 @@ public class ServiceRegistry {
 					}
 				}
 				if (!possedeToStringue) {
-					throw new Exception("La méthode ToStringue du service n'existe pas");
+					throw new Exception("La méthode toStringue du service n'existe pas");
 				}
 				
 				if (!Modifier.isPublic(method.getModifiers())) {
-					throw new Exception("La méthode ToStringue du service n'est pas publique");
+					throw new Exception("La méthode toStringue du service n'est pas publique");
 				}
 				
 				if (!Modifier.isStatic(method.getModifiers())) {
-					throw new Exception("La méthode ToStringue du service n'est pas statique");
+					throw new Exception("La méthode toStringue du service n'est pas statique");
 				}
 				
 				if (!method.getReturnType().getName().equals(String.class.getName())) {
-					throw new Exception("La méthode ToStringue du service ne retourne pas un objet de type string");
+					throw new Exception("La méthode toStringue du service ne retourne pas un objet de type string");
 				}
 				
 				if (method.getExceptionTypes().length != 0) {
-					throw new Exception("La méthode ToStringue du service ne doit pas retourner d'exception");
+					throw new Exception("La méthode toStringue du service ne doit pas retourner d'exception");
 				}
 				
 				servicesClasses.add((Class<? extends bri.Service>) classe);
