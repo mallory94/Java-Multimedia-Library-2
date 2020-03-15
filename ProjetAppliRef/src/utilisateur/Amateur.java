@@ -11,6 +11,7 @@ public class Amateur {
 	public Amateur(String pseudo, String mdp) {
 		this.pseudo = pseudo;
 		this.mdp = mdp;
+		this.messagesRecu = new ArrayList<>();
 	}
 	
 	public String getMdp() {

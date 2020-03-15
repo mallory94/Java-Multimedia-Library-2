@@ -5,9 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+
 
 import bri.Service;
+import utilisateur.Amateur;
 import utilisateur.ListeUtilisateur;
+import utilisateur.Message;
 
 public class ServiceMessagerieInterne implements Runnable, Service{
 	private final Socket client;
@@ -21,15 +25,16 @@ public class ServiceMessagerieInterne implements Runnable, Service{
 		BufferedReader in = null;
 		PrintWriter out = null;
 		try {
-			in = new BufferedReader(new InputStreamReader(this.getSocket().getInputStream()));
-			out = new PrintWriter (this.getSocket().getOutputStream ( ), true);
+			in = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
+			out = new PrintWriter (this.client.getOutputStream ( ), true);
 			out.println("Entrez votre identifiant d'amateur");
 			String id = in.readLine();
 			if (id != null) {
 				out.println("Entrez votre mot de passe d'amateur");
 				String mdp = in.readLine();
-				if (connectionValide(id,mdp)) {
-					this.ModeMessagerie(in, out);
+				Amateur ama = connectionValide(id,mdp);
+				if (ama != null) {
+					this.ModeMessagerie(in, out, ama);
 				}
 				else {
 					out.println("les informations données sont invalides, veuillez les vérifier");
@@ -54,25 +59,35 @@ public class ServiceMessagerieInterne implements Runnable, Service{
 		}
 	}
 
-	private boolean connectionValide(String id, String mdp) {
+	private Amateur connectionValide(String id, String mdp) {
 		try {
-			ListeUtilisateur.getAmateur(id, mdp);
-			return true;
+			Amateur ama;
+			ama = ListeUtilisateur.getAmateur(id, mdp);
+			return ama;
 		}catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 	
-	private void ModeMessagerie(BufferedReader in, PrintWriter out) {
-		out.println("vous êtes bien dans la messagerie interne mon copain");
+	private void ModeMessagerie(BufferedReader in, PrintWriter out, Amateur amateurActuel) {
+		out.println("Bienvenu dans la messagerie interne ##(0) - pour lire les messages reçus##(1) - pour écrire à un autre Amateur");
+		try {
+			String sin = in.readLine();
+			if(sin == "0") {
+				out.println("Messages reçu : ");
+			}else if (sin == "1") {
+				out.println("à qui voulez-vous écrire ?");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
-	protected Socket getSocket() {
-		return this.client;
-	}
-
 	public static String toStringue() {
-		return("Service Messagerie Interne");
+		return "Messagerie interne";
 	}
+	
 }
