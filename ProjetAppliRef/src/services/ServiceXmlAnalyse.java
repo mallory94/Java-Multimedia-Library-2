@@ -19,7 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import appli.FTPUploadFile;
+import appli.FTPDownloadFile;
 import bri.Service;
 
 
@@ -37,16 +37,18 @@ public class ServiceXmlAnalyse implements Service {
 			BufferedReader in = new BufferedReader (new InputStreamReader(socket.getInputStream ( )));
 			PrintWriter out = new PrintWriter (socket.getOutputStream ( ), true);
 			out.println("Bienvenue sur le service d'analyse xml.##"
-					+ "Entrez le chemin de votre fichier suivi d'un pipe puis de votre mail comme ceci \"C:/Users/Jean/Desktop/test.xml|example@gmail.com\":##");
+					+ "Entrez le chemin de votre fichier suivi d'un pipe puis de votre mail comme ceci \"ftp://197.284.41.1:25/dossier/.../test.xml|example@gmail.com\":##");
 			String line = in.readLine();
+			 
 			System.out.println(line);
 			String[] lines = line.split("\\|");
+			
 			for (String tmpLine : lines) {
 				System.out.println(tmpLine);
 			}
-			String chemin = lines[0];
+			final String chemin = lines[0];
 			String email = lines[1];
-			new FTPUploadFile(chemin).start();
+			new FTPDownloadFile(chemin).start();
 			new ServiceEmail(email,analyseTest(chemin)).start();;
 			out.println("Vous allez bientôt recevoir un mail contenant les résultats de l'analyse du fichier");
 		}
