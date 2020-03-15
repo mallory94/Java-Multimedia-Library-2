@@ -6,12 +6,12 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import bri.ServiceBRi;
+import bri.Service;
 import utilisateur.ListeUtilisateur;
 
-public class ServiceAuthentificationAmateur extends ServiceStandard implements Runnable{
+public class ServiceMessagerieInterne extends ServiceStandard implements Runnable, Service{
 
-	public ServiceAuthentificationAmateur(Socket socket) {
+	public ServiceMessagerieInterne(Socket socket) {
 		super(socket);
 	}
 
@@ -28,7 +28,7 @@ public class ServiceAuthentificationAmateur extends ServiceStandard implements R
 				out.println("Entrez votre mot de passe d'amateur");
 				String mdp = in.readLine();
 				if (connectionValide(id,mdp)) {
-					new Thread(new ServiceMessagerie(this.getSocket())).start();
+					this.ModeMessagerie(in, out);
 				}
 				else {
 					out.println("les informations données sont invalides, veuillez les vérifier");
@@ -61,6 +61,10 @@ public class ServiceAuthentificationAmateur extends ServiceStandard implements R
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	private void ModeMessagerie(BufferedReader in, PrintWriter out) {
+		out.println("vous êtes bien dans la messagerie interne mon copain");
 	}
 
 }
