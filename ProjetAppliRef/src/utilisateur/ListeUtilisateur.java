@@ -39,6 +39,10 @@ public class ListeUtilisateur {
 		programmeurs.put("test",new Programmeur("test", "test", "url", "anonymous", "brette"));
 		programmeurs.put("mal",new Programmeur("mal", "mmm","malurl", "anonymous", "brette"));
 		
+		// si un système d'inscription était mise en place alors l'inscription d'un programmeur créerait forcément un compte amateur pour qu'il puisse utiliser ses services
+		amateurs.put("test",new Amateur("test", "test", "anonymous", "brette"));
+		amateurs.put("mal",new Amateur("mal", "mmm", "anonymous", "brette"));
+		
 		amateurs.put("mallory", new Amateur("mallory","mallory", "anonymous", "brette"));
 		amateurs.put("vad", new Amateur("vad","vvv", "vad", "vad"));
 		
