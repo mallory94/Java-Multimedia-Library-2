@@ -21,24 +21,20 @@ public class Amateur {
 			BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));			
 			// Informe l'utilisateur de la connection
 			System.out.println("Connecté au serveur " + socket.getInetAddress() + ":"+ socket.getPort());
-
+			
 			String line;
-			System.out.println(sin.readLine().replaceAll("##", "\n")); //on écrit ce que le serveur veut
-			line = clavier.readLine(); //on lit la réponse au clavier
-			// envoie au serveur
-			sout.println(line); 
-			// lit la réponse provenant du serveur
-			line = sin.readLine();
-			// Ecrit la ligne envoyee par le serveur
-			System.out.println(line.replaceAll("##", "\n"));
-			line = clavier.readLine();
-			sout.println(line);
 			
-			/*System.out.println("socket : " + socket);
-			System.out.println("sin : " + sin);
-			System.out.println("sin.readLine() : " + sin.readLine());*/
-			System.out.println(sin.readLine().replaceAll("##", "\n"));
-			
+			while(!sin.ready()) {
+				System.out.println(sin.readLine().replaceAll("##", "\n")); //on écrit ce que le serveur veut
+				line = clavier.readLine(); //on lit la réponse au clavier
+				if (line.equals("exit")) {
+					break;
+				}
+				else {
+					sout.println(line);
+				}
+				 
+			}
 			
 			
 			socket.close();
@@ -49,26 +45,4 @@ public class Amateur {
 		catch (IOException e2) { ; }		
 	}
 	
-	/*public static void connexion(Socket socket, BufferedReader sin, PrintWriter sout, BufferedReader clavier) { // cette fonction est utiliser pour permettre à l'utilisateur de se connecter
-		String line = "err";
-		try {
-			line = sin.readLine();
-			System.out.println(line); // on écrit la demande du serveur
-			
-			line = clavier.readLine(); // on lit le nom d'utilisateur
-			sout.println(line);
-			
-			line = sin.readLine();
-			System.out.println(line); // on écrit la demande du serveur
-			
-			line = clavier.readLine(); // on lit le mot de passe
-			sout.println(line);
-			
-			line = sin.readLine();
-			System.out.println(line);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
 }
