@@ -113,5 +113,10 @@ public class FTPUploadFile implements Service{
 	public void start() {
 		new Thread(this).start();
 	}
+
+	
+	public static String toStringue() {
+		return "Service d'analyse de .xml";
+	}
 	
 }
