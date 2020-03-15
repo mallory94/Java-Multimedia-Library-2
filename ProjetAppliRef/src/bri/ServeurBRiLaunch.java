@@ -31,7 +31,7 @@ public class ServeurBRiLaunch implements Runnable{
 			if (listen_socket.getLocalPort() == portAmateur) {
 				while(true) {
 					new ServiceBRi(listen_socket.accept()).start();
-					//new Thread( new ServiceAuthentificationAmateur(listen_socket.accept())).start();
+					
 				}
 			}
 			else if (listen_socket.getLocalPort() == portProgrammeur) {
