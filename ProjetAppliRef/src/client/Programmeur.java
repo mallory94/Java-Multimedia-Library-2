@@ -21,18 +21,18 @@ public class Programmeur {
 			
 			String line;
 			
-			while(!sin.ready()) {
-				System.out.println(sin.readLine().replaceAll("##", "\n")); //on écrit ce que le serveur veut
-				line = clavier.readLine(); //on lit la réponse au clavier
-				if (line.equals("exit")) {
-					break;
+			while(true) {
+				if(sin.ready()) {
+					System.out.println(sin.readLine().replaceAll("##", "\n")); //on écrit ce que le serveur veut
+					line = clavier.readLine(); //on lit la réponse au clavier
+					if (line.equals("exit")) {
+						break;
+					}
+					else {
+						sout.println(line);
+					} 
 				}
-				else {
-					sout.println(line);
-				}
-				 
 			}
-			
 			
 			socket.close();
 		}

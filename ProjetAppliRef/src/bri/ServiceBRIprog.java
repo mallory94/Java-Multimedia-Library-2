@@ -20,43 +20,53 @@ private Socket client;
 
 	@Override
 	public void run() {
+		BufferedReader in = null;
+		PrintWriter out = null;
 		try {
-			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
-			PrintWriter out = new PrintWriter (client.getOutputStream ( ), true);
+			 in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
+			 out = new PrintWriter (client.getOutputStream ( ), true);
 			
 			String line = "";
-			while(!in.ready()) {
-				out.println("Que souhaitez vous faire ?##1 : Fournir un nouveau service##"
-						+ "2 : Mettre-à-jour un service##"
-						+ "3 : Déclarer un changement d'adresse de votre serveur ftp##"
-						+ "4 : Quitter l'application##"
-						+ "Saisissez le numéro de l'option voulue");
-				Integer choix = null;
-				try {
-					choix = Integer.parseInt(in.readLine());
-					switch (choix) {
-					case 1:
-						new ServiceUploadService(client).start();
-						break;
-					case 2:
-						break;
-					case 3:
-						break;
-					case 4:
-						break;
-					}
+			System.out.println("ok");
+			out.println("Que souhaitez vous faire ?##1 : Fournir un nouveau service##"
+					+ "2 : Mettre-à-jour un service##"
+					+ "3 : Déclarer un changement d'adresse de votre serveur ftp##"
+					+ "4 : Quitter l'application##"
+					+ "Saisissez le numéro de l'option voulue");
+			Integer choix = null;
+			try {
+				choix = Integer.parseInt(in.readLine());
+				switch (choix) {
+				case 1:
+					new ServiceUploadService(client).start();
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
 				}
-				catch (NumberFormatException e1) {
-					out.println("Erreur de saisie.## Veuillez saisir un chiffre parmi ceux proposés ");
-				}
-				
-				
-				System.out.println(line);
 			}
+			catch (NumberFormatException e1) {
+				e1.printStackTrace();
+				out.println("Erreur de saisie.## Veuillez saisir un chiffre parmi ceux proposés ");
+			}
+			
+			
+			System.out.println(line);
 
 		}
 		catch (IOException e) {
-			//Fin du service
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			out.close();
 		}
 
 
