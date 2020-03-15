@@ -24,14 +24,11 @@ public class ServiceAuthentificationAmateur extends ServiceStandard implements R
 			out = new PrintWriter (this.getSocket().getOutputStream ( ), true);
 			out.println("Entrez votre identifiant d'amateur");
 			String id = in.readLine();
-			//System.out.println("l'id : " + id);
-			//System.out.println("le truc fantome : ");
 			if (id != null) {
 				out.println("Entrez votre mot de passe d'amateur");
 				String mdp = in.readLine();
 				if (connectionValide(id,mdp)) {
-					//out.println("félicitation vous êtes réel"); // ligne de test doit être effacer une fois son utilité accomplie
-					new ServiceBRi(this.getSocket()).start();
+					new Thread(new ServiceMessagerie(this.getSocket())).start();
 				}
 				else {
 					out.println("les informations données sont invalides, veuillez les vérifier");
