@@ -36,7 +36,7 @@ public class ListeUtilisateur {
 	}
 	
 	public static void initialisation() {
-		amateurs.put("mec", new Amateur("mallory","mallory", "anonymous", "brette"));
+		amateurs.put("mallory", new Amateur("mallory","mallory", "anonymous", "brette"));
 		amateurs.put("vad", new Amateur("vad","vvv", "vad", "vad"));
 		
 		amateurs.get("vad").AddMessage(new Message("salut mec j'aime bien les bananes au comcombres.", amateurs.get("mec")));
@@ -46,7 +46,6 @@ public class ListeUtilisateur {
 	}
 	
 	public static Amateur getAmateurByLogin(String login) {
-		
 		
 		return amateurs.get(login);
 	}
