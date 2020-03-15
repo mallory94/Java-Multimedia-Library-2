@@ -6,11 +6,15 @@ public class Amateur {
 
 	private String mdp;
 	private String pseudo;
+	private String pseudoFtp;
+	private String mdpFtp;
 	private ArrayList<Message> messagesRecu; // tous les messages reçu d'un amateur
 	
-	public Amateur(String pseudo, String mdp) {
+	public Amateur(String pseudo, String mdp, String pseudoFtp, String mdpFtp) {
 		this.pseudo = pseudo;
 		this.mdp = mdp;
+		this.pseudoFtp = pseudoFtp;
+		this.mdpFtp = mdpFtp;
 		this.messagesRecu = new ArrayList<>();
 	}
 	
@@ -28,6 +32,14 @@ public class Amateur {
 	
 	public void AddMessage(Message m) {
 		this.messagesRecu.add(m);
+	}
+
+	public String getPseudoFtp() {
+		return pseudoFtp;
+	}
+
+	public String getMdpFtp() {
+		return mdpFtp;
 	}
 
 }
