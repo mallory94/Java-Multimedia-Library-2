@@ -41,6 +41,15 @@ public class ListeUtilisateur {
 		
 		amateurs.put("vad", new Amateur("vad","vvv"));
 		amateurs.put("mec", new Amateur("mec","mec"));
+		
+		amateurs.get("vad").AddMessage(new Message("salut mec j'aime bien les bananes au comcombres.", amateurs.get("mec")));
+		amateurs.get("vad").AddMessage(new Message("je suis pas ton père mec", amateurs.get("mec")));
+		amateurs.get("vad").AddMessage(new Message("si jamais tu est mort tu ne pourras pas me lire :'(", amateurs.get("mec")));
+		
+	}
+	
+	public static Amateur getAmateurByLogin(String login) {
+		return amateurs.get(login);
 	}
 
 }

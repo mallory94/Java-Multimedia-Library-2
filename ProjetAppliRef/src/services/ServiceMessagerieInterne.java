@@ -77,15 +77,37 @@ public class ServiceMessagerieInterne implements Runnable, Service{
 			String sin = in.readLine();
 			
 			if(sin.equals("0")) {
-				out.println("Messages reçu : ");
+				String s = "";
+				ArrayList<Message> messages = amateurActuel.getMessagesRecu();
+				if(messages.size() == 0) {
+					s = "vous n'avez pas de messages.";
+				}
+				else {
+					s += "Messages reçus : ";
+					for (int i = 0; i < messages.size(); i++) {
+						s += "##" + messages.get(i).getEmeteur().getPseudo() + " --> " + messages.get(i).getMessage();
+					}
+				}
+				out.println(s);
+				
 			}else if (sin.equals("1")) {
 				out.println("à qui voulez-vous écrire ?");
+				 String line = in.readLine();
+				 Amateur dest = ListeUtilisateur.getAmateurByLogin(line);
+				 if(dest != null) {
+					out.println("Que voulez-vous lui envoyer ? : ");
+					line = in.readLine();
+					dest.AddMessage(new Message(line, amateurActuel));
+					out.println("Message envoyé !");
+				 } else {
+					out.println("L'utilisateur que vous demandez n'existe pas."); 
+				 }
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	
 	}
 	
 	public static String toStringue() {
