@@ -8,13 +8,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 
 import services.ServiceUploadService;
+import utilisateur.Programmeur;
 
 public class ServiceBRIprog implements Runnable {
-
-private Socket client;
+	private Programmeur programmeur;
+	private Socket client;
 	
-	public ServiceBRIprog(Socket socket) {
+	public ServiceBRIprog(Socket socket, Programmeur programmeur) {
 		client = socket;
+		this.programmeur = programmeur;
 	}
 	
 
@@ -38,7 +40,7 @@ private Socket client;
 				choix = Integer.parseInt(in.readLine());
 				switch (choix) {
 				case 1:
-					new ServiceUploadService(client).start();
+					new ServiceUploadService(client, programmeur).start();
 					break;
 				case 2:
 					break;
