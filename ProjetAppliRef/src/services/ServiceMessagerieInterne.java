@@ -73,10 +73,12 @@ public class ServiceMessagerieInterne implements Runnable, Service{
 	private void ModeMessagerie(BufferedReader in, PrintWriter out, Amateur amateurActuel) {
 		out.println("Bienvenu dans la messagerie interne ##(0) - pour lire les messages reçus##(1) - pour écrire à un autre Amateur");
 		try {
+			
 			String sin = in.readLine();
-			if(sin == "0") {
+			
+			if(sin.equals("0")) {
 				out.println("Messages reçu : ");
-			}else if (sin == "1") {
+			}else if (sin.equals("1")) {
 				out.println("à qui voulez-vous écrire ?");
 			}
 		} catch (IOException e) {
