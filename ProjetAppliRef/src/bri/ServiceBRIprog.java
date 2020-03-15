@@ -20,9 +20,11 @@ private Socket client;
 
 	@Override
 	public void run() {
+		BufferedReader in = null;
+		PrintWriter out = null;
 		try {
-			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
-			PrintWriter out = new PrintWriter (client.getOutputStream ( ), true);
+			 in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
+			 out = new PrintWriter (client.getOutputStream ( ), true);
 			
 			String line = "";
 			System.out.println("ok");
@@ -47,6 +49,7 @@ private Socket client;
 				}
 			}
 			catch (NumberFormatException e1) {
+				e1.printStackTrace();
 				out.println("Erreur de saisie.## Veuillez saisir un chiffre parmi ceux proposés ");
 			}
 			
@@ -55,7 +58,15 @@ private Socket client;
 
 		}
 		catch (IOException e) {
-			//Fin du service
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			out.close();
 		}
 
 
