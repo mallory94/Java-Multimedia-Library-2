@@ -9,10 +9,11 @@ import java.net.Socket;
 import bri.Service;
 import utilisateur.ListeUtilisateur;
 
-public class ServiceMessagerieInterne extends ServiceStandard implements Runnable, Service{
-
+public class ServiceMessagerieInterne implements Runnable, Service{
+	private final Socket client;
+	
 	public ServiceMessagerieInterne(Socket socket) {
-		super(socket);
+		this.client = socket;
 	}
 
 	@Override
@@ -66,5 +67,12 @@ public class ServiceMessagerieInterne extends ServiceStandard implements Runnabl
 	private void ModeMessagerie(BufferedReader in, PrintWriter out) {
 		out.println("vous êtes bien dans la messagerie interne mon copain");
 	}
+	
+	protected Socket getSocket() {
+		return this.client;
+	}
 
+	public static String toStringue() {
+		return("Service Messagerie Interne");
+	}
 }
