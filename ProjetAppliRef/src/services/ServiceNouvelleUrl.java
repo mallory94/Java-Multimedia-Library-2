@@ -6,34 +6,32 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import bri.Service;
+import utilisateur.Programmeur;
 
-public class ServiceUploadService implements Service{
+public class ServiceNouvelleUrl implements Runnable {
 	
 	private static int cpt = 1;
 	
-
 	private final Socket client;
+	private Programmeur prog;
 	
-	public ServiceUploadService(Socket socket) {
+	public ServiceNouvelleUrl(Socket socket, Programmeur prog) {
 		this.client = socket;
+		this.prog = prog;
 	}
 
 	public void run() {
 		System.out.println("*********Connexion démarrée");
 		try {
-			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
-			PrintWriter out = new PrintWriter (client.getOutputStream ( ), true);
-			out.println("Entrez le chemin de la classe à upload :##");
+			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream()));
+			PrintWriter out = new PrintWriter (client.getOutputStream(), true);
+			out.println("quelle est votre nouvelle URL ? : ");
 			String line = in.readLine();
-			System.out.println("Connexion  <-- "+line);
 			
-			out.println();
-			System.out.println("Connexion --> ");
-		}
-		catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		//Fin du service d'inversion
 		System.out.println("*********Connexion terminée");
 		try {client.close();} catch (IOException e2) {}
@@ -44,10 +42,11 @@ public class ServiceUploadService implements Service{
 	}
 
 	public static String toStringue() {
-		return "telechargement de service";
+		return "Changement d'url";
 	}
 	
 	public void start() {
 		new Thread(this).start();
 	}
+
 }
