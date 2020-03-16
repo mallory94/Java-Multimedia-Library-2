@@ -19,8 +19,7 @@ public class TestFTP {
 		    
 		    String fileNameURL = "file:" + "/classesProgrammeurs/" + programmeur.getPseudo() + "/" + nomFichierClasse;  // ou file:///c:/etc
 			
-			URLClassLoader urlcl = URLClassLoader.newInstance(new URL[] {new URL("file:///C:/Users/mallory/Documents/Code/ProjetAppliRef/ProjetAppliRef/test/ServiceBonjour.class"), 
-					new URL("file://ServiceBonjour.class")});
+			URLClassLoader urlcl = new URLClassLoader(new URL[] {new URL("file:///C:/Users/mallory/Documents/Code/ProjetAppliRef/ProjetAppliRef/test/")});
 			//String nomClasseSansExtension = new StringBuffer(new String (new StringBuffer(nomFichierClasse).reverse()).substring(6)).reverse().toString();
 			try {
 				//System.out.println(programmeur.getPseudo() + "." + nomClasseSansExtension);
