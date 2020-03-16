@@ -20,15 +20,15 @@ public class Amateur {
 			// (on pourrait aussi utiliser Scanner)
 			BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));			
 			// Informe l'utilisateur de la connection
-			System.out.println("Connect� au serveur " + socket.getInetAddress() + ":"+ socket.getPort());
+			System.out.println("Connecte au serveur " + socket.getInetAddress() + ":"+ socket.getPort());
 			
 			String line;
 			
 			while(true) {
 				if(sin.ready()) {
 					System.out.println("rentre");
-					System.out.println(sin.readLine().replaceAll("##", "\n")); //on �crit ce que le serveur veut
-					line = clavier.readLine(); //on lit la r�ponse au clavier
+					System.out.println(sin.readLine().replaceAll("##", "\n")); //on ecrit ce que le serveur veut
+					line = clavier.readLine(); //on lit la reponse au clavier
 					if (line.equals("exit")) {
 						break;
 					}

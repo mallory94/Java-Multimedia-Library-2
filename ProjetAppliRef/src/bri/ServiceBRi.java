@@ -26,8 +26,8 @@ public class ServiceBRi implements Runnable {
 					break;
 				}
 			}
-			// instancier le service num�ro "choix" en lui passant la socket "client"
-			// invoquer run() pour cette instance ou la lancer dans un thread � part
+			// instancier le service numero "choix" en lui passant la socket "client"
+			// invoquer run() pour cette instance ou la lancer dans un thread e part
 			try {
 				new Thread(ServiceRegistry.getServiceDemarrer(choix).getConstructor(Class.forName(Socket.class.getName())).newInstance(client)).start();
 			} catch (InstantiationException e) {
@@ -45,7 +45,7 @@ public class ServiceBRi implements Runnable {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			//rajouter un if pour ajouter un nouveau service, je pr�cise que le service bri ne doit jamais close la socket.
+			//rajouter un if pour ajouter un nouveau service, je precise que le service bri ne doit jamais close la socket.
 				
 			}
 		catch (Exception e) {

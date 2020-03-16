@@ -32,11 +32,11 @@ public class ServiceBRIprog implements Runnable {
 			
 			String line = "";
 			out.println("Que souhaitez vous faire ?##1 : Fournir un nouveau service##"
-					+ "2 : Mettre-�-jour un service##"
-					+ "3 : D�clarer un changement d'adresse de votre serveur ftp##"
-					+ "4 : D�marrer / Arr�ter un service##"
+					+ "2 : Mettre-e-jour un service##"
+					+ "3 : Declarer un changement d'adresse de votre serveur ftp##"
+					+ "4 : Demarrer / Arreter un service##"
 					+ "5 : Quitter l'application##"
-					+ "Saisissez le num�ro de l'option voulue");
+					+ "Saisissez le numero de l'option voulue");
 			
 			Integer choix = null;
 			try {
@@ -60,7 +60,7 @@ public class ServiceBRIprog implements Runnable {
 			}
 			catch (NumberFormatException e1) {
 				e1.printStackTrace();
-				out.println("Erreur de saisie.## Veuillez saisir un chiffre parmi ceux propos�s ");
+				out.println("Erreur de saisie.## Veuillez saisir un chiffre parmi ceux proposes ");
 			}
 			
 			
