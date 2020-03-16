@@ -39,7 +39,7 @@ public class Amateur {
 			
 			socket.close();
 		}
-		catch (IOException e) { System.err.println(e); }
+		catch (Exception e) { e.printStackTrace();; }
 		// Refermer dans tous les cas la socket
 		try { if (socket != null) socket.close(); } 
 		catch (IOException e2) { ; }		

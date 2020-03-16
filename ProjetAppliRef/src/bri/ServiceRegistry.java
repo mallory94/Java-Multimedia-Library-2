@@ -12,20 +12,28 @@ public class ServiceRegistry {
 	// partagée en concurrence par les clients et les "ajouteurs" de services,
 	// un Vector pour cette gestion est pratique
 	
+	
+	
+	private static List<Class<? extends bri.Service>> servicesClasses;
+	private static List<Class<? extends bri.Service>> servicesDemarrer; // contient tous les services démarés
+	
 	static {
 		servicesClasses = new ArrayList<Class<? extends bri.Service>>();
+		servicesDemarrer = new ArrayList<Class<? extends bri.Service>>();
 		try {
 
 			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceInversion"));
 			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceXmlAnalyse"));
 			ServiceRegistry.addService((Class<? extends bri.Service>) Class.forName("services.ServiceMessagerieInterne"));
+			
+			for (int i = 0; i < servicesClasses.size(); i++) { // par défault tous les services sont démarrés
+				servicesDemarrer.add(servicesClasses.get(i));
+			}
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private static List<Class<? extends bri.Service>> servicesClasses;
-	
 
 // ajoute une classe de service après contrôle de la norme BLTi
 	@SuppressWarnings("unchecked")
@@ -145,18 +153,90 @@ public class ServiceRegistry {
 	}
 	
 // renvoie la classe de service (numService -1)	
-	public static Class<? extends Service> getServiceClass(int numService) {
+	public static Class<? extends Service> getServiceDemarrer(int numService) {
 		return(servicesClasses.get(numService));
 	}
 	
 // liste les activités présentes
 	public static String toStringue() {
 		String result = "";
-		int compteur = 0;
-		for (Class<? extends bri.Service> serviceClass : servicesClasses ) {
-			result = result + " " + compteur++ +" "  + serviceClass.getName() + " |##";
+		try {
+			int compteur = 0;
+			for (Class<? extends bri.Service> serviceClass : servicesDemarrer ) {
+				result = result + " " + compteur++ +" "  + serviceClass.getName() + " |##";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public static String ArreterService(String nomService) {
+		String reussite = "Le service demandée n'existe pas.";
+		if(isServiceExist(nomService)) {
+			reussite = "Le service demandé est déjà arrêté.";
+			for (int i = 0; i < servicesDemarrer.size(); i++) {
+				if(servicesDemarrer.get(i).getName().equals(nomService)) {
+					servicesDemarrer.remove(i);
+					reussite = "Le service à bien été arrêté.";
+				}
+			}
+		}
+		return reussite;
+	}
+	
+	public static String DemarrerService(String nomService) {
+		String reussite = "Le service demandé n'existe pas.";
+		if(isServiceExist(nomService)) {
+			if(!isDejaDemarre(nomService)) {
+				try {
+					servicesDemarrer.add((Class<? extends bri.Service>) Class.forName(nomService));
+					reussite = "Le service à bien été démarré";
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+					reussite = "Le service demandé n'existe pas.";
+				}
+			}else {
+				reussite = "La classe est déjà démarré.";
+			}
+		}
+		return reussite;
+	}
+	
+	private static boolean isServiceExist(String nomService) { // teste si le service existe bien
+		boolean exist = false;
+		for (int i = 0; i < servicesClasses.size(); i++) {
+			if(servicesClasses.get(i).getName().equals(nomService)) {
+				exist = true;
+			}
+		}
+		return exist;
+	}
+	
+	private static boolean isDejaDemarre(String nomService) { // teste si le service n'est pas déjà démarré
+		boolean exist = false;
+		for (int i = 0; i < servicesDemarrer.size(); i++) {
+			if(servicesDemarrer.get(i).getName().equals(nomService)) {
+				exist = true;
+			}
+		}
+		return exist;
+	}
+	
+	public static ArrayList<Class<? extends bri.Service>> getServiceDemarrer() {
+		return new ArrayList<Class<? extends bri.Service>>(servicesDemarrer);
+		
+	}
+	
+	public static ArrayList<Class<? extends bri.Service>> getServiceArreter() {
+		ArrayList<Class<? extends bri.Service>> a = new ArrayList<Class<? extends bri.Service>>();
+		for (int i = 0; i < servicesClasses.size(); i++) {
+			if(!isDejaDemarre(servicesClasses.get(i).getName())) {
+				a.add(servicesClasses.get(i));
+			}
+		}
+		 return a;
+		
 	}
 
 }

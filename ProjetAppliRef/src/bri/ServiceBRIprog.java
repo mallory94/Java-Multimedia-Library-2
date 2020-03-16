@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 
+import services.ServiceArreterDemarrer;
 import services.ServiceNouveauService;
 import services.ServiceNouvelleUrl;
 import utilisateur.Programmeur;
@@ -34,8 +35,10 @@ public class ServiceBRIprog implements Runnable {
 			out.println("Que souhaitez vous faire ?##1 : Fournir un nouveau service##"
 					+ "2 : Mettre-à-jour un service##"
 					+ "3 : Déclarer un changement d'adresse de votre serveur ftp##"
-					+ "4 : Quitter l'application##"
+					+ "4 : Démarrer / Arrêter un service##"
+					+ "5 : Quitter l'application##"
 					+ "Saisissez le numéro de l'option voulue");
+			
 			Integer choix = null;
 			try {
 				choix = Integer.parseInt(in.readLine());
@@ -49,6 +52,9 @@ public class ServiceBRIprog implements Runnable {
 					new Thread(new ServiceNouvelleUrl(client, programmeur)).start();
 					break;
 				case 4:
+					new Thread(new ServiceArreterDemarrer(client)).start();
+					break;
+				case 5:
 					break;
 				}
 			}

@@ -29,7 +29,7 @@ public class ServiceBRi implements Runnable {
 			// instancier le service numéro "choix" en lui passant la socket "client"
 			// invoquer run() pour cette instance ou la lancer dans un thread à part
 			try {
-				new Thread(ServiceRegistry.getServiceClass(choix).getConstructor(Class.forName(Socket.class.getName())).newInstance(client)).start();
+				new Thread(ServiceRegistry.getServiceDemarrer(choix).getConstructor(Class.forName(Socket.class.getName())).newInstance(client)).start();
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
@@ -48,8 +48,8 @@ public class ServiceBRi implements Runnable {
 			//rajouter un if pour ajouter un nouveau service, je précise que le service bri ne doit jamais close la socket.
 				
 			}
-		catch (IOException e) {
-			//Fin du service
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		//try {client.close();} catch (IOException e2) {}
