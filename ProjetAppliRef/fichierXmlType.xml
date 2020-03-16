@@ -1,0 +1,20 @@
+<librairie>  
+  <livre categorie="CUISINE">  
+    <titre lang="fr">Italien tous les jours</titre>  
+    <auteur>Giada De Laurentiis</auteur>  
+    <annee>2005</annee>  
+    <prix>30.00</prix>  
+  </livre>  
+  <livre categorie="ENFANT">  
+    <titre lang="fr">Harry Potter</titre>  
+    <auteur>J K. Rowling</auteur>  
+    <annee>2005</annee>  
+    <prix>29.99</prix>  
+  </livre>  
+  <livre categorie="WEB">
+    <titre lang="fr">Apprendre le XML</titre>  
+    <auteur>Erik T. Ray</auteur>  
+    <annee>2003</annee>  
+    <prix>39.95</prix>  
+  </livre>  
+</librairie>  
