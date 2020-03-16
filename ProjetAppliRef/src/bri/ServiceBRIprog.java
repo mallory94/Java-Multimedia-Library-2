@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 
 import services.ServiceArreterDemarrer;
+import services.ServiceMettreAJourService;
 import services.ServiceNouveauService;
 import services.ServiceNouvelleUrl;
 import utilisateur.Programmeur;
@@ -47,6 +48,7 @@ public class ServiceBRIprog implements Runnable {
 					new Thread(new ServiceNouveauService(client, programmeur)).start();
 					break;
 				case 2:
+					new Thread(new ServiceMettreAJourService(client, programmeur)).start();
 					break;
 				case 3:
 					new Thread(new ServiceNouvelleUrl(client, programmeur)).start();

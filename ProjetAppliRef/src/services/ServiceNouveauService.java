@@ -12,6 +12,7 @@ import utilisateur.Programmeur;
 
 public class ServiceNouveauService extends ServiceStandard implements Runnable {
 	private Programmeur programmeur;
+	private final String option = "ajouter";
 	
 	public ServiceNouveauService(Socket socket, Programmeur programmeur) {
 		super(socket);
@@ -28,11 +29,10 @@ public class ServiceNouveauService extends ServiceStandard implements Runnable {
 			out.println("##Votre url ftp est " + programmeur.getUrl() + "##Entrez le nom de la classe à upload (exemple : VotreClasse.class):##");
 			String nomFichier = in.readLine();
 			if (nomFichier != null) {
-				new FTPDownloadFileProg(programmeur, nomFichier).start();
+				
+				new FTPDownloadFileProg(programmeur, nomFichier, option).start();
 				out.println("##fichier telecharge avec succes");
 			}
-			
-			
 			
 		}
 		catch (IOException e) {

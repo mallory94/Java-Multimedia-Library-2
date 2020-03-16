@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import bri.ServiceRegistry;
 import utilisateur.Programmeur;
 
 public class ChargeurDeClasse implements Runnable{
@@ -20,17 +21,35 @@ public class ChargeurDeClasse implements Runnable{
 	public void run() {
 		 
 		try{
-		    URL urlDeMonFichierLocal =  new URL("./" + programmeur.getPseudo() + "/" + nomFichierClasse);
-		    ClassLoader loader = new URLClassLoader(new URL[] {urlDeMonFichierLocal}); 
-		    Class theLoadedClass = Class.forName( nomFichierClasse ,true, loader);
+
+		    URL urlDeMonFichierLocal =  new URL(new URL("file:"), "classesProgrammeurs/" + programmeur.getPseudo() + "/" + nomFichierClasse);
+		    
+		    String fileNameURL = "file:" + "classesProgrammeurs/" + programmeur.getPseudo() + "/" + nomFichierClasse;  // ou file:///c:/etc
+			
+			URLClassLoader urlcl = URLClassLoader.newInstance(new URL[] {new URL("file:///C:/Users/mallory/Documents/Code/ProjetAppliRef/ProjetAppliRef/classesProgrammeurs/test/")});
+			String nomClasseSansExtension = new StringBuffer(new String (new StringBuffer(nomFichierClasse).reverse()).substring(6)).reverse().toString();
+			try {
+				ServiceRegistry.addService(urlcl.loadClass(programmeur.getPseudo() + "." + nomClasseSansExtension));
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+//			
+//		    System.out.println(urlDeMonFichierLocal.getPath());
+//		    System.out.println(programmeur.getPseudo());
+//		    ClassLoader loader = new URLClassLoader(new URL[] {urlDeMonFichierLocal}); 
+		    
+//		    System.out.println(nomClasseSansExtension);
+//		    Class theLoadedClass = Class.forName(programmeur.getPseudo() + "." + nomClasseSansExtension ,true, loader);
+//		    
+//		    ServiceRegistry.addService(theLoadedClass);
+//		    
+//		    System.out.println("classe chargée");
 		 
-		    theLoadedClass.newInstance();
-		    System.out.println("classe chargée");
-		 
-		}catch(MalformedURLException ex){System.out.println("MalformedURLException");
-		}catch(ClassNotFoundException ex){System.out.println("ClassNotFoundException");
-		}catch(InstantiationException ex){System.out.println("InstantiationException");
-		}catch(IllegalAccessException ex){System.out.println("IllegalAccessException");}
+		}catch(MalformedURLException ex){ex.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void start() {

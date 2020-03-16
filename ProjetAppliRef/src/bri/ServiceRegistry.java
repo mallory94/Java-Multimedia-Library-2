@@ -39,6 +39,7 @@ public class ServiceRegistry {
 	@SuppressWarnings("unchecked")
 	public static void addService(Class<?> classe) {
 		synchronized (servicesClasses) {
+			
 			// vérifier la conformité par introspection
 			try {
 				Class<?>[] tabI = classe.getInterfaces();
@@ -136,7 +137,10 @@ public class ServiceRegistry {
 					throw new Exception("La méthode toStringue du service ne doit pas retourner d'exception");
 				}
 				
+				
 				servicesClasses.add((Class<? extends bri.Service>) classe);
+				
+				
 				
 					
 
@@ -236,6 +240,11 @@ public class ServiceRegistry {
 			}
 		}
 		 return a;
+		
+	}
+	
+	
+	public static void actualiserClasse() {
 		
 	}
 

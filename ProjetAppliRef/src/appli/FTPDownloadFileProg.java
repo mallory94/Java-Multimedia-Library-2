@@ -20,10 +20,12 @@ import utilisateur.Programmeur;
 public class FTPDownloadFileProg implements Runnable{
 	private Programmeur programmeur;
 	private String nomFichier;
+	private String comportement; //"ajouter" ou "actualiser"
 	
-	public FTPDownloadFileProg(Programmeur programmeur, String nomFichier){
+	public FTPDownloadFileProg(Programmeur programmeur, String nomFichier, String comportement){
 		this.programmeur = programmeur;
 		this.nomFichier = nomFichier;
+		this.comportement = comportement;
 	}
 	
 	@Override
@@ -55,7 +57,6 @@ public class FTPDownloadFileProg implements Runnable{
 		}
         FTPClient client = new FTPClient();
         new File("./classesProgrammeurs/" + programmeur.getPseudo()).mkdir();
-        System.out.println("o");
         try ( OutputStream os = new FileOutputStream("classesProgrammeurs/" + programmeur.getPseudo() + "/" + nomFichier)) {
             client.connect(host,port);
             client.login(programmeur.getPseudoFtp(), programmeur.getMdpFtp());
@@ -64,7 +65,10 @@ public class FTPDownloadFileProg implements Runnable{
             System.out.println("status = " + status);
             System.out.println("reply  = " + client.getReplyString());
             System.out.println("avant");
-            new ChargeurDeClasse(programmeur, nomFichier ).start();
+            if (comportement.equals("ajouter")) {
+            	new ChargeurDeClasse(programmeur, nomFichier ).start();
+            }
+            else if (comportement.equals("actualiser"))
             System.out.println("apres");
         }
         catch (Exception e) {

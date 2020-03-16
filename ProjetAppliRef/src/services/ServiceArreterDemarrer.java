@@ -12,7 +12,6 @@ import bri.ServiceRegistry;
 import utilisateur.Programmeur;
 
 public class ServiceArreterDemarrer implements Service {
-private static int cpt = 1;
 	
 	private final Socket client;
 	//private Programmeur prog;
@@ -23,7 +22,6 @@ private static int cpt = 1;
 	}
 
 	public void run() {
-		System.out.println("*********Connexion démarrée");
 		BufferedReader in = null;
 		PrintWriter out = null;
 		try {
@@ -62,7 +60,6 @@ private static int cpt = 1;
 		}
 		
 		//Fin du service d'inversion
-		System.out.println("*********Connexion terminée");
 		try {
 			client.close();
 			out.close();
