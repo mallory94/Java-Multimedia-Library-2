@@ -3,6 +3,7 @@ package appli;
 import org.apache.commons.net.ftp.FTPClient;
 
 import utilisateur.Amateur;
+import utilisateur.Programmeur;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,41 +17,38 @@ public class TestFTPDownload {
 	
 
 	public static void main(String[] args) {
-		Amateur amateur = new Amateur("mallory","mallory", "anonymous", "brette");
-		String destination = "ftp://localhost:2121/ohoh/ok/fichierATelecharger.xml";
+		Programmeur programmeur = new Programmeur("mallory", "mallory", "ftp://localhost:2121/ohoh/", "anonymous", "brette");
+		String destination = programmeur.getUrl();
 		String host = null;
 		Integer port = null;
 		String directoryPath = null;
-		String chemin =  null;
-		String nomFichier = null;
+		String chemin = null;
+		String nomFichier = "test.class";
 		URI uri;
 		try {
 			uri = new URI(destination);
 			host = uri.getHost();
-			System.out.println(host);
+			System.out.println("host = " + host);
 			port = uri.getPort();
-			System.out.println(port);
+			System.out.println("port = " + port);
 			directoryPath = uri.getPath().substring(1);
 			System.out.println(directoryPath);
-			nomFichier=  FilenameUtils.getName(uri.getPath());
+			System.out.println("nomFichier = " + nomFichier);
 			chemin =  FilenameUtils.getFullPathNoEndSeparator(uri.getPath());
+			System.out.println("chemin = " + chemin);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		
-		String filename = "fichierTelecharge.xml";
-        String pseudoAmateur;
-        //new File("./" + pseudoAmateur).mkdir( );
         FTPClient client = new FTPClient();
-        try (OutputStream os = new FileOutputStream(nomFichier)) {
+        new File("./" + programmeur.getPseudo()).mkdir();
+        try ( OutputStream os = new FileOutputStream("mallory/" + nomFichier)) {
             client.connect(host,port);
-            client.login(amateur.getPseudoFtp(), amateur.getMdpFtp());
-            client.changeWorkingDirectory(chemin);
-            
-            boolean status = client.retrieveFile(filename, os);
+            client.login(programmeur.getPseudoFtp(), programmeur.getMdpFtp());
+            client.changeWorkingDirectory(programmeur.getPseudo());
+            boolean status = client.retrieveFile(nomFichier, os);
             System.out.println("status = " + status);
             System.out.println("reply  = " + client.getReplyString());
-        } 
+        }
         catch (IOException e) {
             e.printStackTrace();
         } 
@@ -61,6 +59,7 @@ public class TestFTPDownload {
                 e.printStackTrace();
             }
         }
+		
         
     }
 

@@ -16,10 +16,11 @@ import org.apache.commons.net.ftp.FTPClient;
 import bri.Service;
 import utilisateur.Amateur;
 
-public class FTPDownloadFile implements Service{
+public class FTPDownloadFileClient implements Service{
 	String destination;
 	
-	public FTPDownloadFile(String destination){
+	
+	public FTPDownloadFileClient(String destination){
 		this.destination = destination;
 	}
 	
