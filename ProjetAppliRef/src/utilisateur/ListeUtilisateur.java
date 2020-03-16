@@ -39,12 +39,12 @@ public class ListeUtilisateur {
 		programmeurs.put("test",new Programmeur("test", "test", "ftp://localhost:2121/ohoh/", "anonymous", "brette"));
 		programmeurs.put("mal",new Programmeur("mal", "mmm","ftp://localhost:2121/classes", "anonymous", "brette"));
 		
+		// si un système d'inscription était mise en place alors l'inscription d'un programmeur créerait forcément un compte amateur pour qu'il puisse utiliser ses services
+		amateurs.put("test",new Amateur("test", "test", "anonymous", "brette"));
+		amateurs.put("mal",new Amateur("mal", "mmm", "anonymous", "brette"));
+		
 		amateurs.put("mallory", new Amateur("mallory","mallory", "anonymous", "brette"));
 		amateurs.put("vad", new Amateur("vad","vvv", "vad", "vad"));
-		
-		amateurs.get("vad").AddMessage(new Message("salut mec j'aime bien les bananes au comcombres.", amateurs.get("mallory")));
-		amateurs.get("vad").AddMessage(new Message("je suis pas ton pire mec", amateurs.get("mallory")));
-		amateurs.get("vad").AddMessage(new Message("si jamais tu est mort tu ne pourras pas me lire :'(", amateurs.get("mallory")));
 		
 	}
 	

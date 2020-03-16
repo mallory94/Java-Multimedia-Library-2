@@ -18,7 +18,7 @@ public class ServiceBRi implements Runnable {
 		try {
 			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
 			PrintWriter out = new PrintWriter(client.getOutputStream(),true);
-			out.println("Liste des services : ##" + ServiceRegistry.toStringue() + "##Tapez le numéro de service désiré : ");
+			out.println("Liste des services : ##" + ServiceRegistry.toStringue() + "##Tapez le numï¿½ro de service dï¿½sirï¿½ : ");
 			Integer choix = null;
 			while (true) {
 				if (in.ready()) {
@@ -26,10 +26,10 @@ public class ServiceBRi implements Runnable {
 					break;
 				}
 			}
-			// instancier le service numéro "choix" en lui passant la socket "client"
-			// invoquer run() pour cette instance ou la lancer dans un thread à part
+			// instancier le service numï¿½ro "choix" en lui passant la socket "client"
+			// invoquer run() pour cette instance ou la lancer dans un thread ï¿½ part
 			try {
-				new Thread(ServiceRegistry.getServiceClass(choix).getConstructor(Class.forName(Socket.class.getName())).newInstance(client)).start();
+				new Thread(ServiceRegistry.getServiceDemarrer(choix).getConstructor(Class.forName(Socket.class.getName())).newInstance(client)).start();
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
@@ -45,10 +45,10 @@ public class ServiceBRi implements Runnable {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			//rajouter un if pour ajouter un nouveau service, je précise que le service bri ne doit jamais close la socket.
+			//rajouter un if pour ajouter un nouveau service, je prï¿½cise que le service bri ne doit jamais close la socket.
 				
 			}
-		catch (IOException e) {
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 
