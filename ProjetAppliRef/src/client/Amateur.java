@@ -26,7 +26,6 @@ public class Amateur {
 			
 			while(true) {
 				if(sin.ready()) {
-					System.out.println("rentre");
 					System.out.println(sin.readLine().replaceAll("##", "\n")); //on ecrit ce que le serveur veut
 					line = clavier.readLine(); //on lit la reponse au clavier
 					if (line.equals("exit")) {
