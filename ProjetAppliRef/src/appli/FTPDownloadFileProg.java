@@ -47,22 +47,27 @@ public class FTPDownloadFileProg implements Runnable{
 			directoryPath = uri.getPath().substring(1);
 			System.out.println(directoryPath);
 			System.out.println("nomFichier = " + nomFichier);
-			chemin =  FilenameUtils.getFullPathNoEndSeparator(uri.getPath());
+			chemin =  FilenameUtils.getFullPath(uri.getPath());
 			System.out.println("chemin = " + chemin);
 		} catch (URISyntaxException e) {
+			System.out.println("erreur de syntaxe");
 			e.printStackTrace();
 		}
         FTPClient client = new FTPClient();
         new File("./classesProgrammeurs/" + programmeur.getPseudo()).mkdir();
+        System.out.println("o");
         try ( OutputStream os = new FileOutputStream("classesProgrammeurs/" + programmeur.getPseudo() + "/" + nomFichier)) {
             client.connect(host,port);
             client.login(programmeur.getPseudoFtp(), programmeur.getMdpFtp());
             client.changeWorkingDirectory(programmeur.getPseudo());
-            boolean status = client.retrieveFile(nomFichier, os);
+            boolean status = client.retrieveFile(chemin + nomFichier, os);
             System.out.println("status = " + status);
             System.out.println("reply  = " + client.getReplyString());
+            System.out.println("avant");
+            new ChargeurDeClasse(programmeur, nomFichier ).start();
+            System.out.println("apres");
         }
-        catch (IOException e) {
+        catch (Exception e) {
             e.printStackTrace();
         } 
         finally {

@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import appli.ChargeurDeClasse;
 import appli.FTPDownloadFileProg;
 import utilisateur.Amateur;
 import utilisateur.Programmeur;
@@ -30,7 +29,6 @@ public class ServiceNouveauService extends ServiceStandard implements Runnable {
 			String nomFichier = in.readLine();
 			if (nomFichier != null) {
 				new FTPDownloadFileProg(programmeur, nomFichier).start();
-				new ChargeurDeClasse(programmeur, nomFichier ).start();
 				out.println("##fichier telecharge avec succes");
 			}
 			

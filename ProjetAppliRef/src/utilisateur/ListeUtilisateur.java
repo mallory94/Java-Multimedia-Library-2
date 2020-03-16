@@ -37,7 +37,7 @@ public class ListeUtilisateur {
 	
 	public static void initialisation() {
 		programmeurs.put("test",new Programmeur("test", "test", "ftp://localhost:2121/ohoh/", "anonymous", "brette"));
-		programmeurs.put("mal",new Programmeur("mal", "mmm","ftp://localhost:2121/classes", "anonymous", "brette"));
+		programmeurs.put("mal",new Programmeur("mal", "mmm","ftp://localhost:2121/classes/", "anonymous", "brette"));
 		
 		// si un système d'inscription était mise en place alors l'inscription d'un programmeur créerait forcément un compte amateur pour qu'il puisse utiliser ses services
 		amateurs.put("test",new Amateur("test", "test", "anonymous", "brette"));
