@@ -1,7 +1,8 @@
 package appli;
 
-public class Appli {
-
+public class TestNomDeClasse {
+	
+	//
 	public static void main(String[] args) {
 		  Class c = null;
 		try {
