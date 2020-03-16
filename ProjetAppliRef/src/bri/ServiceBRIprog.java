@@ -29,7 +29,6 @@ public class ServiceBRIprog implements Runnable {
 			 out = new PrintWriter (client.getOutputStream ( ), true);
 			
 			String line = "";
-			System.out.println("ok");
 			out.println("Que souhaitez vous faire ?##1 : Fournir un nouveau service##"
 					+ "2 : Mettre-à-jour un service##"
 					+ "3 : Déclarer un changement d'adresse de votre serveur ftp##"
@@ -38,6 +37,7 @@ public class ServiceBRIprog implements Runnable {
 			Integer choix = null;
 			try {
 				choix = Integer.parseInt(in.readLine());
+				System.out.println("choix = " + choix);
 				switch (choix) {
 				case 1:
 					new Thread(new ServiceNouveauService(client, programmeur)).start();
@@ -61,14 +61,14 @@ public class ServiceBRIprog implements Runnable {
 		}
 		catch (IOException e) {
 			e.printStackTrace();
-		}
-		finally {
 			try {
 				in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 			out.close();
+		}
+		finally {
 		}
 
 

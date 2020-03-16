@@ -13,7 +13,7 @@ public class ServiceBRi implements Runnable {
 	public ServiceBRi(Socket socket) {
 		client = socket;
 	}
-
+	@Override
 	public void run() {
 		try {
 			BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
@@ -49,7 +49,7 @@ public class ServiceBRi implements Runnable {
 				
 			}
 		catch (IOException e) {
-			//Fin du service
+			e.printStackTrace();
 		}
 
 		//try {client.close();} catch (IOException e2) {}

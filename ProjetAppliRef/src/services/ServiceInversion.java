@@ -35,7 +35,7 @@ public class ServiceInversion implements Service{
 		}
 		//Fin du service d'inversion
 		System.out.println("*********Connexion "+this.numero+" terminée");
-		try {client.close();} catch (IOException e2) {}
+		try {client.close();} catch (IOException e2) {e2.printStackTrace();}
 	}
 	
 	protected void finalize() throws Throwable {

@@ -17,7 +17,7 @@ public class ServeurBRiLaunch implements Runnable{
 		try {
 			listen_socket = new ServerSocket(port); //premier problème vu, le serveur brilauch marche qu
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			e.printStackTrace();;
 		}
 	}
 

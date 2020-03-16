@@ -19,7 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import appli.FTPDownloadFile;
+import appli.FTPDownloadFileClient;
 import bri.Service;
 
 
@@ -48,7 +48,7 @@ public class ServiceXmlAnalyse implements Service {
 			}
 			final String chemin = lines[0];
 			String email = lines[1];
-			new FTPDownloadFile(chemin).start();
+			new FTPDownloadFileClient(chemin).start();
 			new ServiceEmail(email,analyseTest(chemin)).start();;
 			out.println("Vous allez bientôt recevoir un mail contenant les résultats de l'analyse du fichier");
 		}

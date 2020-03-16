@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import appli.ChargeurDeClasse;
+import appli.FTPDownloadFileProg;
 import utilisateur.Amateur;
 import utilisateur.Programmeur;
 
@@ -24,33 +26,27 @@ public class ServiceNouveauService extends ServiceStandard implements Runnable {
 		try {
 			in = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
 			out = new PrintWriter (getSocket().getOutputStream ( ), true);
-			out.println("");
-			String id = in.readLine();
-			if (id != null) {
-				out.println("Entrez le chemin de la classe à upload :##");
-				String line = in.readLine();
-				System.out.println("Connexion  <-- "+line);
-				
-				out.println();
-				System.out.println("Connexion --> ");
-				
-				
+			out.println("##Votre url ftp est " + programmeur.getUrl() + "##Entrez le nom de la classe à upload (exemple : VotreClasse.class):##");
+			String nomFichier = in.readLine();
+			if (nomFichier != null) {
+				new FTPDownloadFileProg(programmeur, nomFichier).start();
+				new ChargeurDeClasse(programmeur, nomFichier ).start();
+				out.println("##fichier telecharge avec succes");
 			}
-			in.close();
-			out.close();
+			
+			
 			
 		}
 		catch (IOException e) {
 			e.printStackTrace();
-		}
-		finally {
 			try {
 				in.close();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
-			
+			out.close();
+		}
+		finally {
 		}
 	}
 
