@@ -1,5 +1,7 @@
 package appli;
 
+import metaServices.ChargeurDeClasse;
+
 public class TestNomDeClasse {
 	
 	//

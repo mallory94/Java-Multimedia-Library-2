@@ -17,8 +17,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import appli.FTPDownloadFileClient;
 import bri.Service;
+import metaServices.FTPDownloadFileClient;
 import metaServices.ServiceEmail;
 
 

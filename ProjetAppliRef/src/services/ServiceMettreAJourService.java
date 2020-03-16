@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import appli.FTPDownloadFileProg;
+import metaServices.FTPDownloadFileProg;
 import utilisateur.Programmeur;
 
 public class ServiceMettreAJourService extends ServiceStandard implements Runnable {

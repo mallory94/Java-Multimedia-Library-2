@@ -1,4 +1,4 @@
-package appli;
+package metaServices;
 
 import java.net.MalformedURLException;
 import java.net.URL;
