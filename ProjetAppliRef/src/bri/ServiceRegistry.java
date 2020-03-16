@@ -154,7 +154,7 @@ public class ServiceRegistry {
 	
 // renvoie la classe de service (numService -1)	
 	public static Class<? extends Service> getServiceDemarrer(int numService) {
-		return(servicesClasses.get(numService));
+		return(servicesDemarrer.get(numService));
 	}
 	
 // liste les activités présentes
@@ -174,11 +174,11 @@ public class ServiceRegistry {
 	public static String ArreterService(String nomService) {
 		String reussite = "Le service demandée n'existe pas.";
 		if(isServiceExist(nomService)) {
-			reussite = "Le service demandé est déjà arrêté.";
+			reussite = "Le service demande est deja arrete.";
 			for (int i = 0; i < servicesDemarrer.size(); i++) {
 				if(servicesDemarrer.get(i).getName().equals(nomService)) {
 					servicesDemarrer.remove(i);
-					reussite = "Le service à bien été arrêté.";
+					reussite = "Le service a bien ete arrete.";
 				}
 			}
 		}
@@ -186,18 +186,18 @@ public class ServiceRegistry {
 	}
 	
 	public static String DemarrerService(String nomService) {
-		String reussite = "Le service demandé n'existe pas.";
+		String reussite = "Le service demande n'existe pas.";
 		if(isServiceExist(nomService)) {
 			if(!isDejaDemarre(nomService)) {
 				try {
 					servicesDemarrer.add((Class<? extends bri.Service>) Class.forName(nomService));
-					reussite = "Le service à bien été démarré";
+					reussite = "Le service a bien ete demarre";
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
-					reussite = "Le service demandé n'existe pas.";
+					reussite = "Le service demande n'existe pas.";
 				}
 			}else {
-				reussite = "La classe est déjà démarré.";
+				reussite = "La classe est deja demarre.";
 			}
 		}
 		return reussite;
