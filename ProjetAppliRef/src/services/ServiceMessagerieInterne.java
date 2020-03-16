@@ -13,7 +13,7 @@ import utilisateur.Amateur;
 import utilisateur.ListeUtilisateur;
 import utilisateur.Message;
 
-public class ServiceMessagerieInterne implements Runnable, Service{
+public class ServiceMessagerieInterne implements Service{
 	private final Socket client;
 	
 	public ServiceMessagerieInterne(Socket socket) {
