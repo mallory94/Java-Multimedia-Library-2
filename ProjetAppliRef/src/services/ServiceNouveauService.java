@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import appli.FTPDownloadFileProg;
-import utilisateur.Amateur;
 import utilisateur.Programmeur;
 
 public class ServiceNouveauService extends ServiceStandard implements Runnable {

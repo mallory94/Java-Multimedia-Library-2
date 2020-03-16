@@ -2,9 +2,7 @@ package services;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -21,6 +19,7 @@ import org.xml.sax.SAXException;
 
 import appli.FTPDownloadFileClient;
 import bri.Service;
+import metaServices.ServiceEmail;
 
 
 public class ServiceXmlAnalyse implements Service {

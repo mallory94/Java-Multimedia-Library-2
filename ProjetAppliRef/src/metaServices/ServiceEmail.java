@@ -1,4 +1,4 @@
-package services;
+package metaServices;
 
 import java.util.Properties;
 import javax.mail.Message;

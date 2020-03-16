@@ -1,6 +1,5 @@
 package appli;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -20,20 +19,23 @@ public class ChargeurDeClasse implements Runnable{
 	@Override
 	public void run() {
 		 
-		try{
+//		try{
 
-		    URL urlDeMonFichierLocal =  new URL(new URL("file:"), "classesProgrammeurs/" + programmeur.getPseudo() + "/" + nomFichierClasse);
-		    
-		    String fileNameURL = "file:" + "classesProgrammeurs/" + programmeur.getPseudo() + "/" + nomFichierClasse;  // ou file:///c:/etc
+//		    URL urlDeMonFichierLocal =  new URL(new URL("file:"), "classesProgrammeurs/" + programmeur.getPseudo() + "/" + nomFichierClasse);
+//		    
+//		    String fileNameURL = "file:" + "classesProgrammeurs/" + programmeur.getPseudo() + "/" + nomFichierClasse;  // ou file:///c:/etc
+//			
+//			URLClassLoader urlcl = URLClassLoader.newInstance(new URL[] {new URL("file:///C:/Users/mallory/Documents/Code/ProjetAppliRef/ProjetAppliRef/classesProgrammeurs/test/")});
+//			String nomClasseSansExtension = new StringBuffer(new String (new StringBuffer(nomFichierClasse).reverse()).substring(6)).reverse().toString();
+//			try {
+//				ServiceRegistry.addService(urlcl.loadClass(programmeur.getPseudo() + "." + nomClasseSansExtension));
+//			}
+//			catch (Exception e) {
+//				e.printStackTrace();
+//			}
 			
-			URLClassLoader urlcl = URLClassLoader.newInstance(new URL[] {new URL("file:///C:/Users/mallory/Documents/Code/ProjetAppliRef/ProjetAppliRef/classesProgrammeurs/test/")});
-			String nomClasseSansExtension = new StringBuffer(new String (new StringBuffer(nomFichierClasse).reverse()).substring(6)).reverse().toString();
-			try {
-				ServiceRegistry.addService(urlcl.loadClass(programmeur.getPseudo() + "." + nomClasseSansExtension));
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+			
+			
 //			
 //		    System.out.println(urlDeMonFichierLocal.getPath());
 //		    System.out.println(programmeur.getPseudo());
@@ -46,10 +48,10 @@ public class ChargeurDeClasse implements Runnable{
 //		    
 //		    System.out.println("classe chargée");
 		 
-		}catch(MalformedURLException ex){ex.printStackTrace();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+//		}catch(MalformedURLException ex){ex.printStackTrace();
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public void start() {

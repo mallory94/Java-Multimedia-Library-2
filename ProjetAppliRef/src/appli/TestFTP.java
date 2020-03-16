@@ -1,22 +1,11 @@
 package appli;
 
-import org.apache.commons.net.ftp.FTPClient;
-
 import bri.ServiceRegistry;
-import utilisateur.Amateur;
 import utilisateur.Programmeur;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
-
-import org.apache.commons.io.FilenameUtils;
 
 public class TestFTP {
 	
