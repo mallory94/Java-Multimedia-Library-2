@@ -1,7 +1,7 @@
 # Services dispenser
 
 
-Java application server which hosts services for programmer and provides it to amateurs
+Java application server hosting services for programmers and provides it to users
 
 ---
 
